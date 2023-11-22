@@ -1,8 +1,16 @@
 * {
     margin: 0;
     padding: 0;
+    color: #fff;
+    font-family: 'League Spartan', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
 }
 
 body {
+    margin: 0;
     background-color: #424242;
 }

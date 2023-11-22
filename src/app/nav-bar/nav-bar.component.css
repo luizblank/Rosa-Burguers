@@ -8,7 +8,7 @@ nav .logo-centralize {
 }
 
 .logo {
-    width: 80px;
+    width: 160px;
     padding: 5px;
 }
 
@@ -19,8 +19,9 @@ ul {
 }
 
 .links {
-    color: white;
     text-decoration: none;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .links:hover {
@@ -38,10 +39,22 @@ ul {
 }
 
 .links li {
-    font-family: 'League Spartan', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
-    width: 100px;
+    height: 60px;
+    width: 150px;
+    font-size: 24px;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo {
+        width: 120px;
+    }
+
+    .links li {
+        height: 40px;
+        width: 120px;
+        font-size: 22px;
+    }
 }
