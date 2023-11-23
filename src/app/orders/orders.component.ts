@@ -1,0 +1,51 @@
+import { Component, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { OrdersTable } from './orderstable';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
+const ELEMENT_DATA: OrdersTable[] = [
+  { orderNum: 1, client: 'Luiz', order: 'Rosinha', info: 'Pão cor de rosa, uma carne, cheddar, alface e molho especial', time: new Date().toISOString().substring(11, 19), ready: 1 },
+  { orderNum: 2, client: 'Marcos', order: 'Cupcake', info: 'Massa de cupcake como pão, chocolate, chantilly, granulado colorido', time: new Date().toISOString().substring(11, 19), ready: 2 },
+  { orderNum: 3, client: 'Emyli', order: 'Barbie combo', info: 'Pão com gergilim, duas carnes, cheddar, alface, cebola, picles, molho especial', time: new Date().toISOString().substring(11, 19), ready: 3 },
+];
+
+@Component({
+  selector: 'app-orders',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
+  templateUrl: './orders.component.html',
+  styleUrl: './orders.component.css'
+})
+export class OrdersComponent {
+  displayedColumns: string[] = ['orderNum', 'client', 'order', 'info', 'time', 'ready'];
+  dataSource = ELEMENT_DATA;
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(orderForModal: any, infoForModal: any) {
+    this.dialog.open(OrdersModal, {
+      data: {
+        order: orderForModal,
+        info: infoForModal
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'orders-modal',
+  templateUrl: 'modal.html',
+  styleUrl: './orders.component.css',
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule],
+})
+export class OrdersModal {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {order: string, info: string}) { }
+}

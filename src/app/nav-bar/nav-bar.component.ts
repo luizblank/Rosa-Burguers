@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,5 +10,6 @@ import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angu
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
-  admLogin: Boolean = false;
+  constructor (private router: Router) {}
+  admLogin: Boolean = true;
 }

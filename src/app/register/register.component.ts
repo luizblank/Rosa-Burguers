@@ -29,6 +29,8 @@ export class RegisterComponent {
   sex = new FormControl('', [Validators.required]);
   age = new FormControl('', [Validators.required, Validators.min(16)]);
   email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
+  passwordConfirmation = new FormControl('', [Validators.required])
   
   getNameErrorMessage() {
     return this.name.hasError('required') ? 'Você deve digitar seu nome' : '';
@@ -52,5 +54,13 @@ export class RegisterComponent {
     }
 
     return this.email.hasError('email') ? 'Email inválido' : '';
+  }
+
+  getPasswordErrorMessage() {
+    return this.password.hasError('required') ? 'Digite sua senha' : '';
+  }
+
+  getPasswordConfirmationErrorMessage() {
+    return this.passwordConfirmation.hasError('required') ? 'Digite sua senha' : '';
   }
 }

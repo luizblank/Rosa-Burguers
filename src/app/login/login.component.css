@@ -7,7 +7,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 150px;
 }
 
 main .title {
@@ -31,7 +30,7 @@ main .title {
 
 .confirmation-button {
     font-size: 22px;
-    margin-bottom: 150px;
+    margin-bottom: 20px;
     height: 50px;
 }
 
