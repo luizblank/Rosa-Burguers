@@ -1,84 +1,73 @@
 <main>
     <div class="preparing-table">
-        <div class="title">Preparando</div>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <ng-container matColumnDef="orderNum">
-                <th mat-header-cell *matHeaderCellDef> Número do pedido</th>
-                <td mat-cell *matCellDef="let element"> {{element.orderNum}} </td>
-            </ng-container>
+        <div>
+            <div class="title">Preparando</div>
+            <div>
+                <table mat-table [dataSource]="orderSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="orderNum">
+                        <th mat-header-cell *matHeaderCellDef> Nº do pedido</th>
+                        <td mat-cell *matCellDef="let element"> {{element.orderNum}} </td>
+                    </ng-container>
     
-            <ng-container matColumnDef="client">
-                <th mat-header-cell *matHeaderCellDef> Cliente </th>
-                <td mat-cell *matCellDef="let element"> {{element.client}} </td>
-            </ng-container>
+                    <ng-container matColumnDef="client">
+                        <th mat-header-cell *matHeaderCellDef> Cliente </th>
+                        <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+                    </ng-container>
     
-            <ng-container matColumnDef="order">
-                <th mat-header-cell *matHeaderCellDef> Pedido </th>
-                <td mat-cell *matCellDef="let element"> {{element.order}} </td>
-            </ng-container>
+                    <ng-container matColumnDef="order">
+                        <th mat-header-cell *matHeaderCellDef> Pedido </th>
+                        <td mat-cell *matCellDef="let element"> {{element.order}} </td>
+                    </ng-container>
     
-            <ng-container matColumnDef="info">
-                <th mat-header-cell *matHeaderCellDef> Informações </th>
-                <td mat-cell *matCellDef="let element">
-                    <button class="confirmation-button" mat-raised-button color="primary"(click)="openDialog(element.order, element.info)">Abrir</button>
-                </td>
-            </ng-container>
+                    <ng-container matColumnDef="info">
+                        <th mat-header-cell *matHeaderCellDef> Informações </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="confirmation-button" mat-raised-button color="primary"
+                                (click)="openDialog(element.order, element.info)">Abrir</button>
+                        </td>
+                    </ng-container>
     
-            <ng-container matColumnDef="time">
-                <th mat-header-cell *matHeaderCellDef> Horário </th>
-                <td mat-cell *matCellDef="let element"> {{element.time}} </td>
-            </ng-container>
+                    <ng-container matColumnDef="time">
+                        <th mat-header-cell *matHeaderCellDef> Horário </th>
+                        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                    </ng-container>
     
-            <ng-container matColumnDef="ready">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element">
-                    <button class="confirmation-button" mat-raised-button color="primary">Pronto</button>
-                </td>
-            </ng-container>
+                    <ng-container matColumnDef="ready">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="confirmation-button" mat-raised-button color="primary" 
+                                (click)="setReadyOrder(element)">Pronto</button>
+                        </td>
+                    </ng-container>
     
-            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+                    <tr mat-header-row *matHeaderRowDef="orderDisplayedColumns" class="header"></tr>
+                    <tr mat-row *matRowDef="let row; columns: orderDisplayedColumns;"></tr>
+                </table>
+                @if (orderSource.data.length > 5) {
+                    <mat-paginator id="tabela1" [pageSizeOptions]="[5]" showFirstLastButtons
+                        aria-label="Select page of orders" style="margin-top: 15px;">
+                    </mat-paginator>
+                }
+            </div>
+        </div>
     </div>
     <div class="ready-table">
-        <div class="title">Pronto</div>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <ng-container matColumnDef="orderNum">
-                <th mat-header-cell *matHeaderCellDef> Número do pedido</th>
-                <td mat-cell *matCellDef="let element"> {{element.orderNum}} </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="client">
-                <th mat-header-cell *matHeaderCellDef> Cliente </th>
-                <td mat-cell *matCellDef="let element"> {{element.client}} </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="order">
-                <th mat-header-cell *matHeaderCellDef> Pedido </th>
-                <td mat-cell *matCellDef="let element"> {{element.order}} </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="info">
-                <th mat-header-cell *matHeaderCellDef> Informações </th>
-                <td mat-cell *matCellDef="let element">
-                    <button class="confirmation-button" mat-raised-button color="primary"(click)="openDialog(element.order, element.info)">Abrir</button>
-                </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="time">
-                <th mat-header-cell *matHeaderCellDef> Horário </th>
-                <td mat-cell *matCellDef="let element"> {{element.time}} </td>
-            </ng-container>
-    
-            <ng-container matColumnDef="ready">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element">
-                    <button class="confirmation-button" mat-raised-button color="primary">Pronto</button>
-                </td>
-            </ng-container>
-    
-            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <div>
+            <div class="title">Pronto</div>
+            <table mat-table [dataSource]="readySource" class="mat-elevation-z8">
+                <ng-container matColumnDef="orderNum">
+                    <th mat-header-cell *matHeaderCellDef> Nº do pedido</th>
+                    <td mat-cell *matCellDef="let element"> {{element.orderNum}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="client">
+                    <th mat-header-cell *matHeaderCellDef> Cliente </th>
+                    <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="readyDisplayedColumns" class="header"></tr>
+                <tr mat-row *matRowDef="let row; columns: readyDisplayedColumns;"></tr>
+            </table>
+        </div>
     </div>
 </main>

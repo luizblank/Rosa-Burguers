@@ -1,5 +1,5 @@
 * {
-    font-size: 19px;
+    font-size: 20px;
 }
 
 main {
@@ -27,6 +27,11 @@ main {
 .modal-style h2 {
     font-weight: 800;
     color: #e91e63;
+}
+
+.mat-elevation-z8 {
+    width: 800px;
+    height: 450px;
 }
 
 .preparing-table {
