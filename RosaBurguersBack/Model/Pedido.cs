@@ -13,7 +13,7 @@ public partial class Pedido
 
     public string Codigo { get; set; } = null!;
 
-    public DateTime Horario { get; set; }
+    public TimeSpan Horario { get; set; }
 
     public virtual Produto? ProdutoNavigation { get; set; }
 

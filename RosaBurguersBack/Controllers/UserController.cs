@@ -13,6 +13,7 @@ namespace RosaBurguersBack.Controllers;
 using DTO;
 using Model;
 using Services;
+using Trevisharp.Security.Jwt;
 
 [ApiController]
 [Route("user")]
@@ -23,10 +24,11 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Login(
         [FromBody]UserData user,
         [FromServices]IUserService service,
-        [FromServices]ISecurityService security)
+        [FromServices]ISecurityService security,
+        [FromServices]CryptoService crypto)
     {
         var loggedUser = await service
-            .GetByLogin(user.Email);
+            .GetByEmail(user.Email);
         
         if (loggedUser == null)
             return Unauthorized("Usuário não existe.");
@@ -38,11 +40,14 @@ public class UserController : ControllerBase
         if (password != realPassword)
             return Unauthorized("Senha incorreta.");
         
-        var jwt = await security.GenerateJwt(new {
+        var jwt = crypto.GetToken(new {
             id = loggedUser.Id,
+            isAdm = loggedUser.Adm
         });
         
-        return Ok(new { jwt });
+        var value = crypto.Validate<JwtPayload>(jwt);
+
+        return Ok(new { value });
     }
 
     [HttpPost("register")]
@@ -53,9 +58,9 @@ public class UserController : ControllerBase
     {
         var errors = new List<string>();
         if (user is null || user.Email is null)
-            errors.Add("É necessário informar um login.");
+            errors.Add("É necessário informar um email.");
         if (user.Email.Length < 5)
-            errors.Add("O Login deve conter ao menos 5 caracteres.");
+            errors.Add("O email deve conter ao menos 5 caracteres.");
 
         if (errors.Count > 0)
             return BadRequest(errors);

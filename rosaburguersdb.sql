@@ -14,7 +14,7 @@ go
 create table Usuario(
 	ID int identity primary key,
 	Nome varchar(100) not null,
-	Idade int not null,
+	DataNasc datetime not null,
 	Sexo varchar(15) not null,
 	Email varchar(100) not null,
 	Senha varchar(MAX) not null,
@@ -44,9 +44,12 @@ create table Pedido(
 	Usuario int references Usuario(ID),
 	Produto int references Produto(ID),
 	Codigo varchar(20) not null,
-	Horario datetime not null
+	Horario time not null
 );
 go
 
-insert into Usuario values ('Administrador', 0, 'Outro', 'RosaBurguers@gmail.com', 'adm', 'adm', 1);
+insert into Usuario values ('Administrador', CONVERT(datetime, '25-08-2017'), 'Outro', 'RosaBurguers@gmail.com', 'adm', 'adm', 1);
+go
+
+select * from Usuario
 go

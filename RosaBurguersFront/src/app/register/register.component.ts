@@ -6,6 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { ClientServiceService } from '../client-service.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-register',
@@ -18,34 +22,37 @@ import {MatSelectModule} from '@angular/material/select';
     MatIconModule, 
     MatSelectModule, 
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule, 
+    MatNativeDateModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
+  constructor(
+    private client: ClientServiceService
+    ) {}
+
   hide = true;
+
   name = new FormControl('', [Validators.required]);
   sex = new FormControl('', [Validators.required]);
-  age = new FormControl('', [Validators.required, Validators.min(16)]);
+  dateBirth = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
-  passwordConfirmation = new FormControl('', [Validators.required])
-  
+
   getNameErrorMessage() {
     return this.name.hasError('required') ? 'Você deve digitar seu nome' : '';
   }
 
   getSexErrorMessage() {
-    return this.name.hasError('required') ? 'Selecione seu sexo' : '';
+    return this.sex.hasError('required') ? 'Selecione seu sexo' : '';
   }
 
-  getAgeErrorMessage() {
-    if (this.age.hasError('required')) {
-      return 'Você deve digitar sua idade';
-    }
-
-    return this.age.hasError('min') ? 'Apenas maiores de 16 anos' : '';
+  getDateBirthErrorMessage() {
+    return this.dateBirth.hasError('required') ? 'Selecione sua data de nascimento' : '';
   }
 
   getEmailErrorMessage() {
@@ -60,7 +67,20 @@ export class RegisterComponent {
     return this.password.hasError('required') ? 'Digite sua senha' : '';
   }
 
-  getPasswordConfirmationErrorMessage() {
-    return this.passwordConfirmation.hasError('required') ? 'Digite sua senha' : '';
+  register() {
+    if(this.name.value == null || this.dateBirth.value == null || 
+      this.sex.value == null || this.email.value == null || 
+      this.password.value == null)
+    {
+      return;
+    }
+    console.log(new Date(this.dateBirth.value).toLocaleDateString())
+    this.client.register({
+      name: this.name.value,
+      dateBirth: new Date(this.dateBirth.value),
+      sex: this.sex.value,
+      email: this.email.value,
+      password: this.password.value
+    })
   }
 }

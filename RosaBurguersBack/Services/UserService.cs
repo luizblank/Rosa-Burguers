@@ -22,21 +22,25 @@ public class UserService : IUserService
         Usuario usuario = new Usuario();
         var salt = await security.GenerateSalt();
 
+        usuario.Nome = data.Name;
+        usuario.DataNasc = data.BirthDate;
+        usuario.Sexo = data.Sex;
         usuario.Email = data.Email;
         usuario.Senha = await security.HashPassword(
             data.Password, salt
         );
         usuario.Salt = salt;
+        usuario.Adm = false;
 
         this.ctx.Add(usuario);
         await this.ctx.SaveChangesAsync();
     }
 
-    public async Task<Usuario> GetByLogin(string login)
+    public async Task<Usuario> GetByEmail(string email)
     {
         var query =
             from user in this.ctx.Usuarios
-            where user.Nome == login
+            where user.Email == email
             select user;
         
         return await query.FirstOrDefaultAsync();

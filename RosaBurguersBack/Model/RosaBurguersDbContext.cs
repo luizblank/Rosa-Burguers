@@ -31,7 +31,7 @@ public partial class RosaBurguersDbContext : DbContext
     {
         modelBuilder.Entity<Imagem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Imagem__3214EC27E0561160");
+            entity.HasKey(e => e.Id).HasName("PK__Imagem__3214EC275D37E878");
 
             entity.ToTable("Imagem");
 
@@ -40,7 +40,7 @@ public partial class RosaBurguersDbContext : DbContext
 
         modelBuilder.Entity<Pedido>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pedido__3214EC27D54FD380");
+            entity.HasKey(e => e.Id).HasName("PK__Pedido__3214EC27B75472EE");
 
             entity.ToTable("Pedido");
 
@@ -48,7 +48,6 @@ public partial class RosaBurguersDbContext : DbContext
             entity.Property(e => e.Codigo)
                 .HasMaxLength(20)
                 .IsUnicode(false);
-            entity.Property(e => e.Horario).HasColumnType("datetime");
 
             entity.HasOne(d => d.ProdutoNavigation).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.Produto)
@@ -61,7 +60,7 @@ public partial class RosaBurguersDbContext : DbContext
 
         modelBuilder.Entity<Produto>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Produto__3214EC27599B3C58");
+            entity.HasKey(e => e.Id).HasName("PK__Produto__3214EC2780743881");
 
             entity.ToTable("Produto");
 
@@ -85,11 +84,12 @@ public partial class RosaBurguersDbContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC27F9127267");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC2765AD629F");
 
             entity.ToTable("Usuario");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.DataNasc).HasColumnType("datetime");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsUnicode(false);

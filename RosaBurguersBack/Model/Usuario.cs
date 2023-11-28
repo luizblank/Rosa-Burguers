@@ -9,7 +9,7 @@ public partial class Usuario
 
     public string Nome { get; set; } = null!;
 
-    public int Idade { get; set; }
+    public DateTime DataNasc { get; set; }
 
     public string Sexo { get; set; } = null!;
 

@@ -10,19 +10,22 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Idade</mat-label>
-            <input matInput type="number" [formControl]="age" required>
-            @if (age.invalid) {
-            <mat-error>{{getAgeErrorMessage()}}</mat-error>
+            <mat-label>Data de nascimento</mat-label>
+            <input matInput [matDatepicker]="picker" [formControl]="dateBirth" required>
+            @if (dateBirth.invalid) {
+            <mat-error>{{getDateBirthErrorMessage()}}</mat-error>
             }
-        </mat-form-field>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
 
         <mat-form-field>
             <mat-label>Sexo</mat-label>
             <mat-select [formControl]="sex" required>
-                <mat-option value="one">Masculino</mat-option>
-                <mat-option value="two">Feminino</mat-option>
-                <mat-option value="three">Outro</mat-option>
+                <mat-option value="Masculino">Masculino</mat-option>
+                <mat-option value="Feminino">Feminino</mat-option>
+                <mat-option value="Outro">Outro</mat-option>
             </mat-select>
             @if (sex.invalid) {
             <mat-error>{{getSexErrorMessage()}}</mat-error>  
@@ -36,7 +39,7 @@
             <mat-error>{{getEmailErrorMessage()}}</mat-error>
             }
         </mat-form-field>
-
+        
         <mat-form-field>
             <mat-label>Digite sua senha</mat-label>
             <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'" required>
@@ -48,19 +51,11 @@
             <mat-error>{{getPasswordErrorMessage()}}</mat-error>
             }
         </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Confirme sua senha</mat-label>
-            <input matInput [formControl]="passwordConfirmation" [type]="hide ? 'password' : 'text'" required>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            @if (passwordConfirmation.invalid) {
-            <mat-error>{{getPasswordConfirmationErrorMessage()}}</mat-error>
-            }
-        </mat-form-field>
-
-        <button class="confirmation-button" mat-raised-button color="primary">Cadastrar</button>
+        @if (name.valid && dateBirth.valid && sex.valid && email.valid && password.valid) {
+        <button class="confirmation-button" mat-raised-button color="primary" (click)="register()">Cadastrar</button>
+        }
+        @else {
+            <button class="confirmation-button" mat-raised-button color="primary" disabled>Cadastrar</button>
+        }
     </div>
 </main>

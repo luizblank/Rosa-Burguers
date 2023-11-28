@@ -1,12 +1,11 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Trevisharp.Security.Jwt;
 
 using RosaBurguersBack.Model;
 using RosaBurguersBack.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<RosaBurguersDbContext>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddSingleton<ISecurityService, SecurityService>();
+builder.Services.AddSingleton<CryptoService>(p => new(){
+    InternalKeySize = 24,
+    UpdatePeriod = TimeSpan.FromDays(1)
+});
 
 builder.Services.AddCors(options =>
 {
