@@ -4,10 +4,10 @@ namespace DTO;
 
 public class UserData
 {
-    public string Name { get; set; }
-    public DateTime BirthDate { get; set; }
-    public string Sex { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public bool Adm { get; set; }
+    public string name { get; set; }
+    public string birthDate { get; set; }
+    public string sex { get; set; }
+    public string email { get; set; }
+    public string password { get; set; }
+    public bool adm { get; set; }
 }

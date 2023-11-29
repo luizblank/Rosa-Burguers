@@ -1,7 +1,5 @@
 using System;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
@@ -28,13 +26,13 @@ public class UserController : ControllerBase
         [FromServices]CryptoService crypto)
     {
         var loggedUser = await service
-            .GetByEmail(user.Email);
+            .GetByEmail(user.email);
         
         if (loggedUser == null)
             return Unauthorized("Usuário não existe.");
         
         var password = await security.HashPassword(
-            user.Password, loggedUser.Salt
+            user.password, loggedUser.Salt
         );
         var realPassword = loggedUser.Senha;
         if (password != realPassword)
@@ -55,18 +53,32 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Create(
         [FromBody]UserData user,
         [FromServices]IUserService service)
-    {
+    {   
         var errors = new List<string>();
-        if (user is null || user.Email is null)
-            errors.Add("É necessário informar um email.");
-        if (user.Email.Length < 5)
-            errors.Add("O email deve conter ao menos 5 caracteres.");
+        var date = DateTime.Today;
+        try {
+            date = DateTime.Parse(user.birthDate);
+        }
+        catch {
+            errors.Add("Data de nascimento inválida!");
+            return BadRequest(errors);
+        }
+        var getUser = await service
+            .GetByEmail(user.email);
 
+        if (getUser is not null)
+            errors.Add("Usuário já cadastrado!");
+        if (user.email.Length < 7)
+            errors.Add("Email inválido!");
+        if (date < DateTime.MinValue || date > DateTime.MaxValue)
+            errors.Add("Data de nascimento inválida!");
+        if (date >= DateTime.Today)
+            errors.Add("Data de nascimento inválida!");
         if (errors.Count > 0)
             return BadRequest(errors);
 
         await service.Create(user);
-        return Ok();
+        return Ok(true);
     }
 
     [HttpDelete]

@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 
 namespace RosaBurguersBack.Services;
 
+using System;
 using DTO;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Model;
 
 public class UserService : IUserService
@@ -22,12 +24,12 @@ public class UserService : IUserService
         Usuario usuario = new Usuario();
         var salt = await security.GenerateSalt();
 
-        usuario.Nome = data.Name;
-        usuario.DataNasc = data.BirthDate;
-        usuario.Sexo = data.Sex;
-        usuario.Email = data.Email;
+        usuario.Nome = data.name;
+        usuario.DataNasc = DateTime.Parse(data.birthDate);
+        usuario.Sexo = data.sex;
+        usuario.Email = data.email;
         usuario.Senha = await security.HashPassword(
-            data.Password, salt
+            data.password, salt
         );
         usuario.Salt = salt;
         usuario.Adm = false;

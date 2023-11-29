@@ -5,25 +5,26 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
 import { ClientServiceService } from '../client-service.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    CommonModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatButtonModule, 
-    MatIconModule, 
-    MatSelectModule, 
-    FormsModule, 
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    FormsModule,
     ReactiveFormsModule,
-    MatDatepickerModule, 
+    MatDatepickerModule,
     MatNativeDateModule
   ],
   templateUrl: './register.component.html',
@@ -32,14 +33,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 export class RegisterComponent {
 
   constructor(
+    private router: Router,
     private client: ClientServiceService
-    ) {}
+  ) { }
 
   hide = true;
 
   name = new FormControl('', [Validators.required]);
   sex = new FormControl('', [Validators.required]);
-  dateBirth = new FormControl('', [Validators.required]);
+  birthDate = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
 
@@ -52,7 +54,7 @@ export class RegisterComponent {
   }
 
   getDateBirthErrorMessage() {
-    return this.dateBirth.hasError('required') ? 'Selecione sua data de nascimento' : '';
+    return this.birthDate.hasError('required') ? 'Selecione sua data de nascimento' : '';
   }
 
   getEmailErrorMessage() {
@@ -68,19 +70,28 @@ export class RegisterComponent {
   }
 
   register() {
-    if(this.name.value == null || this.dateBirth.value == null || 
-      this.sex.value == null || this.email.value == null || 
-      this.password.value == null)
-    {
+    if (this.name.value == null || this.birthDate.value == null ||
+      this.sex.value == null || this.email.value == null ||
+      this.password.value == null) {
       return;
     }
-    console.log(new Date(this.dateBirth.value).toLocaleDateString())
-    this.client.register({
+
+    var response = this.client.register({
       name: this.name.value,
-      dateBirth: new Date(this.dateBirth.value),
+      birthDate: (new Date(this.birthDate.value)).toISOString().substring(0, 10),
       sex: this.sex.value,
       email: this.email.value,
       password: this.password.value
+    }, (result: any) => {
+      if (result == true)
+      {
+        alert('Cadastro feito com sucesso!');
+        setTimeout(() => this.router.navigate(['login']))
+      }
+      else
+      {
+        alert(result.error[0]);
+      }
     })
   }
 }

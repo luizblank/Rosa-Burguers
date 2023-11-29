@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ClientData } from './client-data';
 import { ApiClientService } from './api-client.service';
+import { catchError } from 'rxjs';
+import { ClientLogin } from './client-login';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +10,15 @@ import { ApiClientService } from './api-client.service';
 export class ClientServiceService {
   constructor(private http: ApiClientService) { }
 
-  register(data: ClientData) {
+  register(data: ClientData, callback: any) {
     this.http.post('user/register', data)
-      .subscribe(response => console.log(response));
+      .pipe(
+        catchError(callback)
+      )
+      .subscribe(response => callback(response));
   }
 
-  login(data: ClientData, callback: any) {
+  login(data: ClientLogin, callback: any) {
     this.http.post('user/login', data)
       .subscribe(
         response => {

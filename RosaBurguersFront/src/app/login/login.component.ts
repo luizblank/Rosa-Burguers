@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { RippleRef } from '@angular/material/core';
+import { ClientServiceService } from '../client-service.service';
 
 @Component({
   selector: 'app-login',
@@ -24,20 +25,38 @@ import { RippleRef } from '@angular/material/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  constructor (private router: Router) {}
+  constructor(
+    private router: Router,
+    private client: ClientServiceService
+  ) { }
 
   hide = true;
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = '';
+  password = '';
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'Você deve digitar seu email';
-    }
-
-    return this.email.hasError('email') ? 'Email inválido' : '';
-  }
 
   goToCadastro() {
     this.router.navigate(['register'])
+  }
+
+  logar()
+  {
+    if (this.email.value == null || this.password.value == null) {
+      return;
+    }
+
+    this.client.login({
+      email: this.email.value,
+      password: this.password.value
+    }, (result: any) => {
+      if (result == null)
+      {
+        alert('Senha ou usuário incorreto!')
+      }
+      else
+      {
+        sessionStorage.setItem('jwt', JSON.stringify(result))
+      }
+    })
   }
 }

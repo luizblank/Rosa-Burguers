@@ -11,8 +11,8 @@
 
         <mat-form-field>
             <mat-label>Data de nascimento</mat-label>
-            <input matInput [matDatepicker]="picker" [formControl]="dateBirth" required>
-            @if (dateBirth.invalid) {
+            <input matInput [matDatepicker]="picker" [formControl]="birthDate" required readonly>
+            @if (birthDate.invalid) {
             <mat-error>{{getDateBirthErrorMessage()}}</mat-error>
             }
             <mat-hint>MM/DD/YYYY</mat-hint>
@@ -51,7 +51,7 @@
             <mat-error>{{getPasswordErrorMessage()}}</mat-error>
             }
         </mat-form-field>
-        @if (name.valid && dateBirth.valid && sex.valid && email.valid && password.valid) {
+        @if (name.valid && birthDate.valid && sex.valid && email.valid && password.valid) {
         <button class="confirmation-button" mat-raised-button color="primary" (click)="register()">Cadastrar</button>
         }
         @else {

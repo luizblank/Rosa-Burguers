@@ -1,6 +1,6 @@
 export interface ClientData {
     name: string,
-    dateBirth: Date,
+    birthDate: string,
     sex: string,
     email: string,
     password: string
