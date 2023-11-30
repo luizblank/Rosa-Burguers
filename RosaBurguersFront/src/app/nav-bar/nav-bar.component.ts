@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { RouteReuseStrategy, Router } from '@angular/router';
+import { ClientServiceService } from '../server/services/client-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,8 +10,18 @@ import { Router } from '@angular/router';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })
-export class NavBarComponent {
-  constructor (private router: Router) {}
-  session: any = sessionStorage.getItem('jwt'); // Se achar retorna uma string, se não retorna nulo
-  admLogin: Boolean = true;
+export class NavBarComponent{
+  constructor(
+    private router: Router,
+    private client: ClientServiceService
+  ) { }
+  @Input() admLogin: Boolean = false;
+
+  goToLogin() {
+    this.router.navigate(['']);
+  }
+
+  goToOrders() {
+    this.router.navigate(['adm/orders']);
+  }
 }

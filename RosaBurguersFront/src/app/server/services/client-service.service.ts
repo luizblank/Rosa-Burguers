@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ClientData } from './client-data';
 import { ApiClientService } from './api-client.service';
 import { catchError } from 'rxjs';
-import { ClientLogin } from './client-login';
+import { ClientData } from '../data/client-data';
+import { ClientLogin } from '../data/client-login';
+import { VerifyData } from '../data/verify-data';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,15 @@ export class ClientServiceService {
         error => {
           callback(null);
         });
+  }
+
+  verify(data: VerifyData, callback: any) {
+    this.http.get('user/verify/' + data.jwt)
+      .subscribe(response => {
+        callback(response);
+      },
+      error => {
+        callback(error);
+      })
   }
 }

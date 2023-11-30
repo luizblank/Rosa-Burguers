@@ -7,15 +7,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
-import { ClientServiceService } from '../client-service.service';
+import { ClientServiceService } from '../server/services/client-service.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
+    NavBarComponent,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,

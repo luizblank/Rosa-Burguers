@@ -1,21 +1,21 @@
 <nav>
     <div class="logo-centralize">
-        <a href="/login"><img src="../assets/Rosa Burguers White.png" class="logo" alt="logo"></a>
+        <a href="" (click)="goToLogin()"><img src="../assets/Rosa Burguers White.png" class="logo" alt="logo"></a>
     </div>
     @if(admLogin)
     {
     <ul>
-        <a class="links" href="">
+        <a class="links">
             <li>
                 Gerenciar
             </li>
         </a>
-        <a class="links" href="">
+        <a class="links">
             <li>
                 Totem
             </li>
         </a>
-        <a class="links" href="/orders">
+        <a class="links" href="" (click)="goToOrders()">
             <li>
                 Pedidos
             </li>

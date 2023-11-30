@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace RosaBurguersBack.Controllers;
 
 using DTO;
+using Microsoft.Identity.Client;
 using Model;
 using Services;
 using Trevisharp.Security.Jwt;
@@ -17,6 +18,16 @@ using Trevisharp.Security.Jwt;
 [Route("user")]
 public class UserController : ControllerBase
 {
+    [HttpGet("verify/{jwt}")]
+    [EnableCors("DefaultPolicy")]
+    public async Task<IActionResult> Verify(
+        string jwt,
+        [FromServices]CryptoService crypto)
+    {
+        var value = crypto.Validate<JwtPayload>(jwt);
+        return Ok(new { value.isAdm });
+    }
+
     [HttpPost("login")]
     [EnableCors("DefaultPolicy")]
     public async Task<IActionResult> Login(
@@ -26,8 +37,8 @@ public class UserController : ControllerBase
         [FromServices]CryptoService crypto)
     {
         var loggedUser = await service
-            .GetByEmail(user.email);
-        
+            .GetByEmail(user.email.ToLower());
+
         if (loggedUser == null)
             return Unauthorized("Usuário não existe.");
         
@@ -42,10 +53,10 @@ public class UserController : ControllerBase
             id = loggedUser.Id,
             isAdm = loggedUser.Adm
         });
-        
+
         var value = crypto.Validate<JwtPayload>(jwt);
 
-        return Ok(value);
+        return Ok(new { jwt , loggedUser.Adm });
     }
 
     [HttpPost("register")]
@@ -63,6 +74,7 @@ public class UserController : ControllerBase
             errors.Add("Data de nascimento inválida!");
             return BadRequest(errors);
         }
+
         var getUser = await service
             .GetByEmail(user.email.ToLower());
 

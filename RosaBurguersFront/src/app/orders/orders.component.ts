@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/di
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { ReadyTable } from './readytable';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 var ORDER_DATA: OrdersTable[] = [
   { orderNum: 1, client: 'Luiz', order: 'Rosinha', info: 'Pão cor de rosa, uma carne, cheddar, alface e molho especial', time: new Date().toISOString().substring(11, 19), ready: 1 },
@@ -26,6 +27,7 @@ var READY_DATA: ReadyTable[] = [
   selector: 'app-orders',
   standalone: true,
   imports: [
+    NavBarComponent,
     CommonModule,
     MatTableModule,
     MatDialogModule,

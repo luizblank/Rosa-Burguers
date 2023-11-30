@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { RippleRef } from '@angular/material/core';
-import { ClientServiceService } from '../client-service.service';
+import { ClientServiceService } from '../server/services/client-service.service';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    NavBarComponent,
     CommonModule, 
     MatFormFieldModule, 
     MatInputModule, 
@@ -24,7 +25,7 @@ import { ClientServiceService } from '../client-service.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent{
   constructor(
     private router: Router,
     private client: ClientServiceService
@@ -54,8 +55,14 @@ export class LoginComponent {
       }
       else
       {
-        sessionStorage.setItem('jwt', JSON.stringify(result))
-        this.router.navigate(['']);
+        sessionStorage.setItem('jwt', JSON.stringify({'value': result.jwt}))
+        if (result.adm)
+        {
+          this.router.navigate(['adm/orders']);
+          return;
+        }
+
+        this.router.navigate(['user']);
       }
     })
   }

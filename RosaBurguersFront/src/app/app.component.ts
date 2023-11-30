@@ -12,7 +12,6 @@ import { OrdersComponent } from './orders/orders.component';
   imports: [
     CommonModule,
     RouterOutlet,
-    NavBarComponent,
     LoginComponent,
     RegisterComponent,
     OrdersComponent
