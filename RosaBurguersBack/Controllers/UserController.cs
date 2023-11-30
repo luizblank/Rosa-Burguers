@@ -20,7 +20,7 @@ public class UserController : ControllerBase
     [HttpPost("login")]
     [EnableCors("DefaultPolicy")]
     public async Task<IActionResult> Login(
-        [FromBody]UserData user,
+        [FromBody]LoginData user,
         [FromServices]IUserService service,
         [FromServices]ISecurityService security,
         [FromServices]CryptoService crypto)
@@ -45,7 +45,7 @@ public class UserController : ControllerBase
         
         var value = crypto.Validate<JwtPayload>(jwt);
 
-        return Ok(new { value });
+        return Ok(value);
     }
 
     [HttpPost("register")]
@@ -64,7 +64,7 @@ public class UserController : ControllerBase
             return BadRequest(errors);
         }
         var getUser = await service
-            .GetByEmail(user.email);
+            .GetByEmail(user.email.ToLower());
 
         if (getUser is not null)
             errors.Add("Usuário já cadastrado!");

@@ -34,20 +34,19 @@ export class LoginComponent {
   email = '';
   password = '';
 
-
   goToCadastro() {
     this.router.navigate(['register'])
   }
 
   logar()
   {
-    if (this.email.value == null || this.password.value == null) {
+    if (this.email == null || this.password == null) {
       return;
     }
 
     this.client.login({
-      email: this.email.value,
-      password: this.password.value
+      email: this.email,
+      password: this.password
     }, (result: any) => {
       if (result == null)
       {
@@ -56,6 +55,7 @@ export class LoginComponent {
       else
       {
         sessionStorage.setItem('jwt', JSON.stringify(result))
+        this.router.navigate(['']);
       }
     })
   }

@@ -11,5 +11,6 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent {
   constructor (private router: Router) {}
+  session: any = sessionStorage.getItem('jwt'); // Se achar retorna uma string, se não retorna nulo
   admLogin: Boolean = true;
 }

@@ -48,7 +48,7 @@ create table Pedido(
 );
 go
 
-insert into Usuario values ('Administrador', CONVERT(datetime, '25-08-2017'), 'Outro', 'RosaBurguers@gmail.com', 'adm', 'adm', 1);
+insert into Usuario values ('Administrador', CONVERT(datetime, '25-08-2017'), 'Outro', 'rosaburguers@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 1);
 go
 
 select * from Usuario

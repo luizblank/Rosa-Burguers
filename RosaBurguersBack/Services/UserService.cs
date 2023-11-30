@@ -27,7 +27,7 @@ public class UserService : IUserService
         usuario.Nome = data.name;
         usuario.DataNasc = DateTime.Parse(data.birthDate);
         usuario.Sexo = data.sex;
-        usuario.Email = data.email;
+        usuario.Email = data.email.ToLower();
         usuario.Senha = await security.HashPassword(
             data.password, salt
         );
