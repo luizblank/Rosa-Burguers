@@ -3,10 +3,19 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
+import { RegLoginAuthGuard } from './prevent.guards';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { 
+        path: '', 
+        component: LoginComponent,
+        canActivate: [RegLoginAuthGuard]
+    },
+    { 
+        path: 'register', 
+        component: RegisterComponent,
+        canActivate: [RegLoginAuthGuard] 
+    },
     {
         path: 'adm',
         children: [
