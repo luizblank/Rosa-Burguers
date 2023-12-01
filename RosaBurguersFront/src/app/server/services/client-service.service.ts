@@ -31,6 +31,7 @@ export class ClientServiceService {
   }
 
   verify(data: VerifyData, callback: any) {
+    console.log(data.jwt)
     this.http.get('user/verify/' + data.jwt)
       .subscribe(response => {
         callback(response);

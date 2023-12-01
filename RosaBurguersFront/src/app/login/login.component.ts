@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { ClientServiceService } from '../server/services/client-service.service';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { RegLoginAuthGuard } from '../server/guards/prevent.guards';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +26,23 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent{
+export class LoginComponent {
   constructor(
     private router: Router,
     private client: ClientServiceService
   ) { }
+
+  // ngOnInit(): void {
+  //   var session = sessionStorage.getItem('jwt');
+  //   if (session != null)
+  //   {
+  //     var jsonSession = JSON.parse(session);
+  //     var response = this.client.verify(jsonSession, 
+  //       (result: any) => {
+  //       console.log(result)
+  //     });
+  //   }
+  // }
 
   hide = true;
   email = '';
@@ -55,7 +68,7 @@ export class LoginComponent{
       }
       else
       {
-        sessionStorage.setItem('jwt', JSON.stringify({'value': result.jwt}))
+        sessionStorage.setItem('jwt', JSON.stringify({'jwt': result.jwt}))
         if (result.adm)
         {
           this.router.navigate(['adm/orders']);

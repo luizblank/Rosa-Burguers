@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 namespace RosaBurguersBack.Controllers;
 
 using DTO;
-using Microsoft.Identity.Client;
 using Model;
 using Services;
 using Trevisharp.Security.Jwt;
@@ -37,7 +36,7 @@ public class UserController : ControllerBase
         [FromServices]CryptoService crypto)
     {
         var loggedUser = await service
-            .GetByEmail(user.email.ToLower());
+            .GetUserByEmail(user.email.ToLower());
 
         if (loggedUser == null)
             return Unauthorized("Usuário não existe.");
@@ -76,7 +75,7 @@ public class UserController : ControllerBase
         }
 
         var getUser = await service
-            .GetByEmail(user.email.ToLower());
+            .GetUserByEmail(user.email.ToLower());
 
         if (getUser is not null)
             errors.Add("Usuário já cadastrado!");

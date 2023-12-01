@@ -7,15 +7,13 @@ public partial class Pedido
 {
     public int Id { get; set; }
 
-    public int? Usuario { get; set; }
+    public int Usuario { get; set; }
 
-    public int? Produto { get; set; }
+    public string NomeChamada { get; set; }
 
-    public string Codigo { get; set; } = null!;
+    public TimeSpan? Horario { get; set; }
 
-    public TimeSpan Horario { get; set; }
+    public virtual ICollection<ItensPedido> ItensPedidos { get; set; } = new List<ItensPedido>();
 
-    public virtual Produto? ProdutoNavigation { get; set; }
-
-    public virtual Usuario? UsuarioNavigation { get; set; }
+    public virtual Usuario UsuarioNavigation { get; set; }
 }

@@ -8,5 +8,6 @@ using Model;
 public interface IUserService
 {
     Task Create(UserData data);
-    Task<Usuario> GetByEmail(string login);
+    Task<Usuario> GetUserByEmail(string login);
+    Task<Usuario> GetUserByID(int id);
 }

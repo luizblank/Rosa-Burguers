@@ -6,7 +6,6 @@ namespace RosaBurguersBack.Services;
 
 using System;
 using DTO;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Model;
 
 public class UserService : IUserService
@@ -38,11 +37,21 @@ public class UserService : IUserService
         await this.ctx.SaveChangesAsync();
     }
 
-    public async Task<Usuario> GetByEmail(string email)
+    public async Task<Usuario> GetUserByEmail(string email)
     {
         var query =
             from user in this.ctx.Usuarios
             where user.Email == email
+            select user;
+        
+        return await query.FirstOrDefaultAsync();
+    }
+
+    public async Task<Usuario> GetUserByID(int id)
+    {
+        var query =
+            from user in this.ctx.Usuarios
+            where user.Id == id
             select user;
         
         return await query.FirstOrDefaultAsync();

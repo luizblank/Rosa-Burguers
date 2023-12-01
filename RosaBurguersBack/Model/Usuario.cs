@@ -7,17 +7,17 @@ public partial class Usuario
 {
     public int Id { get; set; }
 
-    public string Nome { get; set; } = null!;
+    public string Nome { get; set; }
 
     public DateTime DataNasc { get; set; }
 
-    public string Sexo { get; set; } = null!;
+    public string Sexo { get; set; }
 
-    public string Email { get; set; } = null!;
+    public string Email { get; set; }
 
-    public string Senha { get; set; } = null!;
+    public string Senha { get; set; }
 
-    public string Salt { get; set; } = null!;
+    public string Salt { get; set; }
 
     public bool Adm { get; set; }
 

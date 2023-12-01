@@ -19,8 +19,8 @@ var ORDER_DATA: OrdersTable[] = [
 ];
 
 var READY_DATA: ReadyTable[] = [
-  { orderNum: 8, client: 'Felipe' },
-  { orderNum: 9, client: 'Xispita' },
+  { orderNum: 8, client: 'Felipe', delete: 8 },
+  { orderNum: 9, client: 'Xispita', delete: 9 },
 ];
 
 @Component({
@@ -41,7 +41,7 @@ export class OrdersComponent implements AfterViewInit{
   orderDisplayedColumns: string[] = ['orderNum', 'client', 'order', 'info', 'time', 'ready'];
   orderSource = new MatTableDataSource<OrdersTable>(ORDER_DATA);
 
-  readyDisplayedColumns: string[] = ['orderNum', 'client'];
+  readyDisplayedColumns: string[] = ['orderNum', 'client', 'delete'];
   readySource = new MatTableDataSource<ReadyTable>(READY_DATA);
 
   constructor(public dialog: MatDialog) {}
@@ -52,15 +52,13 @@ export class OrdersComponent implements AfterViewInit{
     this.orderSource.paginator = this.paginator;
   }
   
-
   setReadyOrder(table: OrdersTable) {
-    this.readySource.data.push({orderNum: table.orderNum, client: table.client})
+    this.readySource.data.push({orderNum: table.orderNum, client: table.client, delete: table.orderNum})
     this.readySource = new MatTableDataSource<ReadyTable>(
       this.readySource.data
     );
     var new_order = this.orderSource.data.filter(item => item.orderNum != table.orderNum);
     this.orderSource.data = new_order;
-    console.log(this.readySource)
   }
 
   openDialog(orderForModal: any, infoForModal: any) {
@@ -70,6 +68,11 @@ export class OrdersComponent implements AfterViewInit{
         info: infoForModal
       }
     });
+  }
+
+  deleteItem(id: number) {
+    var new_ready = this.readySource.data.filter(item => item.orderNum != id);
+    this.readySource.data = new_ready;
   }
 }
 
