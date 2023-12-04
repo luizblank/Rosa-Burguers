@@ -58,7 +58,7 @@
     <div class="ready-table">
         <div>
             <div class="title">Pronto</div>
-            <table mat-table [dataSource]="readySource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="readySource.filteredData|slice:0:5" class="mat-elevation-z8">
                 <ng-container matColumnDef="orderNum">
                     <th mat-header-cell *matHeaderCellDef> Nº do pedido</th>
                     <td mat-cell *matCellDef="let element"> {{element.orderNum}} </td>

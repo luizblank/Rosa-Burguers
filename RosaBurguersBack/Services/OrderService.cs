@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DTO;
 using RosaBurguersBack.Model;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using System.Collections.Generic;
 
 namespace RosaBurguersBack.Services;
 
@@ -44,5 +46,11 @@ public class OrderService : IOrderService
             select order;
 
         return await query.FirstOrDefaultAsync();
+    }
+
+    public async Task<List<Pedido>> GetOrders()
+    {
+        return await this.ctx.Pedidos
+            .ToListAsync();
     }
 }

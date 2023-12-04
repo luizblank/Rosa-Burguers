@@ -6,5 +6,5 @@ using RosaBurguersBack.Model;
 public interface IOrderItemService
 {
     Task Add(OrderItemData data, int orderID);
-    Task<List<ItensPedido>> GetItensByID(int id);
+    Task<List<ItensPedido>> GetItensByOrderID(int id);
 }

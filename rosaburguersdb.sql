@@ -61,3 +61,8 @@ go
 select * from Produto
 go
 
+select * from Pedido
+go
+
+select * from ItensPedido
+go

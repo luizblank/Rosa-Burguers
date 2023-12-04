@@ -57,7 +57,7 @@ Obs: 'Tem tela/Tem Interface' = Possui parte visual, mesmo sem funcionar.
 - [X] Aplica salt na senha do usuário.
 - [X] Aplica slow Hash na senha do usuário.
 - [X] Login retorna JWT para o frontend que o guarda no Session Storage.
-- [ ] Após o Login a página de usuário normal ou adm é mostrada corretamente.
+- [X] Após o Login a página de usuário normal ou adm é mostrada corretamente.
 - [ ] Adm é capaz de ver produtos existentes.
 - [ ] Adm é capaz de cadastrar novos produtos.
 - [ ] Adm é capaz de ver promoções existentes.

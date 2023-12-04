@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiClientService } from './api-client.service';
+import { BackEndService } from './backend.service';
 import { catchError } from 'rxjs';
 import { ClientData } from '../data/client-data';
 import { ClientLogin } from '../data/client-login';
@@ -8,8 +8,8 @@ import { VerifyData } from '../data/verify-data';
 @Injectable({
   providedIn: 'root'
 })
-export class ClientServiceService {
-  constructor(private http: ApiClientService) { }
+export class ClientService {
+  constructor(private http: BackEndService) { }
 
   register(data: ClientData, callback: any) {
     this.http.post('user/register', data)

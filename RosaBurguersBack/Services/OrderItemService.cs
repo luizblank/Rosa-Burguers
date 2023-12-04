@@ -27,12 +27,16 @@ public class OrderItemService : IOrderItemService
         await this.ctx.SaveChangesAsync();
     }
 
-    public async Task<List<ItensPedido>> GetItensByID(int id)
+    public async Task<List<ItensPedido>> GetItensByOrderID(int id)
     {
         var query =
             from item in this.ctx.ItensPedidos
-            where item.Produto == id
-            select item;
+            where item.Pedido == id
+            select new ItensPedido {
+                Id = item.Id, 
+                Pedido = item.Pedido, 
+                Produto = item.Produto 
+            };
         
         return await query.ToListAsync();
     }

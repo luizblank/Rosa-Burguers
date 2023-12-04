@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouteReuseStrategy, Router } from '@angular/router';
-import { ClientServiceService } from '../server/services/client-service.service';
+import { ClientService } from '../server/services/client-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,7 +13,7 @@ import { ClientServiceService } from '../server/services/client-service.service'
 export class NavBarComponent{
   constructor(
     private router: Router,
-    private client: ClientServiceService
+    private client: ClientService
   ) { }
   @Input() admLogin: Boolean = false;
 

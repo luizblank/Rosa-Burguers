@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
-import { ClientServiceService } from '../server/services/client-service.service';
+import { ClientService } from '../server/services/client-service.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -36,7 +36,7 @@ export class RegisterComponent {
 
   constructor(
     private router: Router,
-    private client: ClientServiceService
+    private client: ClientService
   ) { }
 
   hide = true;
@@ -88,7 +88,7 @@ export class RegisterComponent {
       if (result == true)
       {
         alert('Cadastro feito com sucesso!');
-        setTimeout(() => this.router.navigate(['login']))
+        this.router.navigate(['login']);
       }
       else
       {

@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { ClientServiceService } from '../server/services/client-service.service';
+import { ClientService } from '../server/services/client-service.service';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { RegLoginAuthGuard } from '../server/guards/prevent.guards';
 
@@ -29,7 +29,7 @@ import { RegLoginAuthGuard } from '../server/guards/prevent.guards';
 export class LoginComponent {
   constructor(
     private router: Router,
-    private client: ClientServiceService
+    private client: ClientService
   ) { }
 
   // ngOnInit(): void {
