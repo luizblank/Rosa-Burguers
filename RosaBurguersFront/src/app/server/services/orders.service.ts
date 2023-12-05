@@ -23,7 +23,6 @@ export class OrderService {
   }
 
   deleteOrder(data: OrderData, callback: any) {
-    console.log(data);
     this.http.post('orders/delete', data)
       .subscribe(response => {
         callback(response);

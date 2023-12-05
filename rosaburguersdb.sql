@@ -55,22 +55,22 @@ create table ItensPedido(
 insert into Usuario values ('Administrador', CONVERT(datetime, '25-08-2017'), 'Outro', 'rosaburguers@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 1);
 go
 
-insert into Usuario values ('Luiz Antonio', CONVERT(datetime, '25-08-2017'), 'Masculino', 'luizrosa@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 1);
+insert into Usuario values ('Luiz Antonio', CONVERT(datetime, '25-08-2017'), 'Masculino', 'luizrosa@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 0);
 go
 
-insert into Usuario values ('Vitória Zago', CONVERT(datetime, '25-08-2017'), 'Feminino', 'zago@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 1);
+insert into Usuario values ('Vitória Zago', CONVERT(datetime, '25-08-2017'), 'Feminino', 'zago@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 0);
 go
 
-insert into Produto values ('Batata', 'Batata frita com sal', 'Porção', 4.99);
+insert into Produto values ('batata', 'batata frita com sal', 'porção', 4.99);
 go
 
-insert into Produto values ('Refrigerante', 'Free refill', 'Bebida', 6.99);
+insert into Produto values ('refrigerante', 'free refill', 'bebida', 6.99);
 go
 
-insert into Produto values ('Rosa Burguer', 'Pão rosa, duas carnes, queijo cheddar, molho especial', 'Hamburguer',16.99);
+insert into Produto values ('rosa burguer', 'pão rosa, duas carnes, queijo cheddar, molho especial', 'hamburguer',16.99);
 go
 
-insert into Produto values ('Donut Burguer', 'Massa de donut usada de pão, açucar, recheio de chocolate', 'Hamburguer', 20.99);
+insert into Produto values ('donut Burguer', 'massa de donut usada de pão, açucar, recheio de chocolate', 'hamburguer', 20.99);
 go
 
 select * from Usuario

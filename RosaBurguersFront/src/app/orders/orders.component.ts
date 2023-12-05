@@ -51,12 +51,17 @@ export class OrdersComponent implements AfterViewInit, OnInit{
     this.orderSource.paginator = this.paginator;
   }
 
+  firstNameOnly(name: String)
+  {
+    var nameSplitted = name.split(' ');
+    return nameSplitted[0];
+  }
+
   getOrders()
   {
     this.orders.getOrders((result: any) => {
       if (result != false)
       {
-        console.log(result);
         this.orderSource.data = result;
       }
       return null;
@@ -86,7 +91,8 @@ export class OrdersComponent implements AfterViewInit, OnInit{
         callname: name
       },
       (result: any) => {
-        console.log(result);
+        if (result != null)
+          console.log(result);
       }
     );
 

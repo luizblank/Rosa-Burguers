@@ -15,7 +15,7 @@
     
                     <ng-container matColumnDef="callname">
                         <th mat-header-cell *matHeaderCellDef> Cliente </th>
-                        <td mat-cell *matCellDef="let element"> {{element.callname}} </td>
+                        <td mat-cell *matCellDef="let element"> {{firstNameOnly(element.callname)}} </td>
                     </ng-container>
     
                     <ng-container matColumnDef="orders">
@@ -61,7 +61,7 @@
 
                 <ng-container matColumnDef="callname">
                     <th mat-header-cell *matHeaderCellDef> Cliente </th>
-                    <td mat-cell *matCellDef="let element"> {{element.callname}} </td>
+                    <td mat-cell *matCellDef="let element"> {{firstNameOnly(element.callname)}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="delete">
