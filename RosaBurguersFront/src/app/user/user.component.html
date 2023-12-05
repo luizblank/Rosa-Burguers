@@ -1,2 +1,23 @@
 <app-nav-bar [admLogin]="false"/>
-<p>user works!</p>
+
+<main>
+    @for (item of [1,2,3,4,5,6,7,8,9]; track $index) {
+        <a href="">
+            <div class="card">
+                <img src="../assets/rosa.jpg" alt="Food Image">
+                <div class="text-area">
+                    <div>
+                        <h2>Rosa Burguer</h2>
+                        <div class="text">
+                            Pãozao muito zica come tudo isso tamo junto cara que foda vamo
+                            que sei la que sei la oq la e pa
+                        </div>
+                    </div>
+                    <div class="price">
+                        R$ 29.90
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</main>

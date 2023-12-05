@@ -30,14 +30,7 @@ export class ClientService {
         });
   }
 
-  verify(data: VerifyData, callback: any) {
-    console.log(data.jwt)
-    this.http.get('user/verify/' + data.jwt)
-      .subscribe(response => {
-        callback(response);
-      },
-      error => {
-        callback(error);
-      })
+  verify(data: VerifyData) {
+    return this.http.get('user/verify/' + data.jwt)
   }
 }

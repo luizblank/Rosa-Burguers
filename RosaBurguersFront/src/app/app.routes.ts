@@ -3,24 +3,24 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
-import { RegLoginAuthGuard } from './server/guards/prevent.guards';
+import { yourGuardGuard } from './your-guard.guard';
 
 export const routes: Routes = [
     { 
         path: '', 
         component: LoginComponent,
-        // canActivate: [RegLoginAuthGuard]
+        canActivate: [yourGuardGuard]
     },
     { 
         path: 'register', 
         component: RegisterComponent,
-        // canActivate: [RegLoginAuthGuard]
+        canActivate: [yourGuardGuard]
     },
     {
         path: 'adm',
         children: [
             { path: 'orders', component: OrdersComponent }
-        ],
+        ]
     },
     {
         path: 'user',
