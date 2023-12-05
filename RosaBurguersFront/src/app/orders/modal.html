@@ -1,8 +1,8 @@
 <mat-dialog-content class="mat-typography modal-style">
     @for (item of data.order; track $index) {
         <div class="item-sep">
-            <h2>{{item.name}}</h2>
-            <span>{{item.description}}</span>
+            <h2>{{capitalizeText(item.name)}}</h2>
+            <span>{{capitalizeText(item.description)}}</span>
         </div>
     }
 </mat-dialog-content>

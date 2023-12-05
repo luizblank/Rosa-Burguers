@@ -104,4 +104,21 @@ export class OrdersComponent implements AfterViewInit, OnInit{
 })
 export class OrdersModal {
   constructor(@Inject(MAT_DIALOG_DATA) public data: {order: any}) { }
+  
+  capitalizeText(text: string)
+  {
+    var textSplitted = text.split(' ');
+    var newText = textSplitted[0].slice(1);
+
+    if (textSplitted.length <= 1)
+    {
+      newText = text.charAt(0).toUpperCase() + newText;
+      return newText;
+    }
+
+    text = text.slice(textSplitted[0].length);
+    newText = textSplitted[0].charAt(0).toUpperCase() + newText;
+    newText = newText + text;
+    return newText;
+  }
 }
