@@ -7,4 +7,5 @@ public interface IOrderItemService
 {
     Task Add(OrderItemData data, int orderID);
     Task<List<ItensPedido>> GetItensByOrderID(int id);
+    Task DeleteByOrderID(int id);
 }

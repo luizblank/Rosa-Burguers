@@ -1,8 +1,7 @@
 export interface OrdersTable {
-    orderNum: number;
-    client: string;
-    order: string;
-    info: string;
+    ordernum: number;
+    callname: string;
+    orders: object;
     time: string;
     ready: number;
 }

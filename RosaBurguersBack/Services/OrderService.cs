@@ -21,10 +21,16 @@ public class OrderService : IOrderService
     {
         Pedido pedido = new Pedido();
 
-        pedido.Usuario = data.userID;
-        pedido.NomeChamada = data.callName;
+        pedido.Usuario = data.userid;
+        pedido.NomeChamada = data.callname;
 
         this.ctx.Add(pedido);
+        await this.ctx.SaveChangesAsync();
+    }
+
+    public async Task Delete(Pedido pedido)
+    {
+        this.ctx.Remove(pedido);
         await this.ctx.SaveChangesAsync();
     }
 
@@ -52,5 +58,14 @@ public class OrderService : IOrderService
     {
         return await this.ctx.Pedidos
             .ToListAsync();
+    }
+
+    public GetOrderData ToGetOrderData(Pedido order)
+    {
+        GetOrderData orderData = new GetOrderData();
+        orderData.ordernum = order.Id;
+        orderData.userid = order.Usuario;
+        orderData.callname = order.NomeChamada;
+        return orderData;
     }
 }

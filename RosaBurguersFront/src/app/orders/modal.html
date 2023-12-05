@@ -1,6 +1,10 @@
 <mat-dialog-content class="mat-typography modal-style">
-    <h2>{{data.order}}</h2>
-    <p>{{data.info}}</p>
+    @for (item of data.order; track $index) {
+        <div class="item-sep">
+            <h2>{{item.name}}</h2>
+            <span>{{item.description}}</span>
+        </div>
+    }
 </mat-dialog-content>
 <mat-dialog-actions style="display: flex; justify-content: end;">
     <button mat-button mat-dialog-close>Fechar</button>

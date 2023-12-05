@@ -47,4 +47,14 @@ public class ProductService : IProductService
 
         return await query.FirstOrDefaultAsync();
     }
+
+    public ProductData ToProductData(Produto product)
+    {
+        ProductData productData = new ProductData();
+        productData.name = product.Nome;
+        productData.description = product.Descricao;
+        productData.type = product.Tipo;
+        productData.price = product.Preco;
+        return productData;
+    }
 }

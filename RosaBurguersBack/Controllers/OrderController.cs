@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace RosaBurguersBack.Controllers;
 
+using System;
 using System.Collections.Generic;
 using DTO;
 using Model;
@@ -21,24 +22,21 @@ public class OrderController : ControllerBase
         [FromServices]IOrderItemService orderItemService,
         [FromServices]IProductService productService)
     {
-        List<GetOrderData> getDataList = new List<GetOrderData>();
-        GetOrderData getData = new GetOrderData();
-        ProductData productData = new ProductData();
         var orders = await orderService.GetOrders();
+        if (orders.Count <= 0)
+            return Ok(false);
+
+        List<GetOrderData> getDataList = new List<GetOrderData>();
         
         foreach (var order in orders)
         {
-            getData.NumPedido = order.Id;
-            getData.NomeChamada = order.NomeChamada;
+            var getData = orderService.ToGetOrderData(order);
             var orderItem = orderItemService.GetItensByOrderID(order.Id).Result;
             foreach (var item in orderItem)
             {
                 var product = productService.GetProductByID(item.Produto).Result;
-                productData.name = product.Nome;
-                productData.description = product.Descricao;
-                productData.type = product.Tipo;
-                productData.price = product.Preco;
-                getData.ItensPedidos.Add(productData);
+                var productData = productService.ToProductData(product);
+                getData.orders.Add(productData);
             }
             getDataList.Add(getData);
         }
@@ -61,9 +59,23 @@ public class OrderController : ControllerBase
         var user = await userService
             .GetUserByID(value.id);
 
-        order.userID = user.Id;
-        order.callName = user.Nome;
+        order.userid = user.Id;
+        order.callname = user.Nome;
 
         await orderService.Create(order);
+    }
+
+    [HttpPost("delete")]
+    [EnableCors("DefaultPolicy")]
+    public async Task<IActionResult> Delete(
+        [FromBody]OrderData orderData,
+        [FromServices]IOrderService orderService,
+        [FromServices]IOrderItemService orderItemService
+    )
+    {
+        var order = orderService.GetOrderByID(orderData.userid).Result;
+        await orderItemService.DeleteByOrderID(order.Id);
+        await orderService.Delete(order);
+        return Ok();
     }
 }

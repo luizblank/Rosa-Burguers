@@ -1,5 +1,5 @@
 export interface ReadyTable {
-    orderNum: number;
-    client: string;
+    ordernum: number;
+    callname: string;
     delete: number;
 }

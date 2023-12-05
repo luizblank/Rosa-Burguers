@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { OrdersTable } from './orderstable';
@@ -7,21 +7,12 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { ReadyTable } from './readytable';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { Router } from '@angular/router';
+import { OrderService } from '../server/services/orders.service';
 
-var ORDER_DATA: OrdersTable[] = [
-  { orderNum: 1, client: 'Luiz', order: 'Rosinha', info: 'Pão cor de rosa, uma carne, cheddar, alface e molho especial', time: new Date().toISOString().substring(11, 19), ready: 1 },
-  { orderNum: 2, client: 'Marcos', order: 'Cupcake', info: 'Massa de cupcake como pão, chocolate, chantilly, granulado colorido', time: new Date().toISOString().substring(11, 19), ready: 2 },
-  { orderNum: 3, client: 'Emyli', order: 'Barbie combo', info: 'Pão com gergilim, duas carnes, cheddar, alface, cebola, picles, molho especial', time: new Date().toISOString().substring(11, 19), ready: 3 },
-  { orderNum: 4, client: 'Marcos', order: 'Cupcake', info: 'Massa de cupcake como pão, chocolate, chantilly, granulado colorido', time: new Date().toISOString().substring(11, 19), ready: 2 },
-  { orderNum: 5, client: 'Emyli', order: 'Barbie combo', info: 'Pão com gergilim, duas carnes, cheddar, alface, cebola, picles, molho especial', time: new Date().toISOString().substring(11, 19), ready: 3 },
-  { orderNum: 6, client: 'Marcos', order: 'Cupcake', info: 'Massa de cupcake como pão, chocolate, chantilly, granulado colorido', time: new Date().toISOString().substring(11, 19), ready: 2 },
-  { orderNum: 7, client: 'Emyli', order: 'Barbie combo', info: 'Pão com gergilim, duas carnes, cheddar, alface, cebola, picles, molho especial', time: new Date().toISOString().substring(11, 19), ready: 3 },
-];
+var ORDER_DATA: OrdersTable[] = [];
 
-var READY_DATA: ReadyTable[] = [
-  { orderNum: 8, client: 'Felipe', delete: 8 },
-  { orderNum: 9, client: 'Xispita', delete: 9 },
-];
+var READY_DATA: ReadyTable[] = [];
 
 @Component({
   selector: 'app-orders',
@@ -37,41 +28,69 @@ var READY_DATA: ReadyTable[] = [
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css'
 })
-export class OrdersComponent implements AfterViewInit{
-  orderDisplayedColumns: string[] = ['orderNum', 'client', 'order', 'info', 'time', 'ready'];
+export class OrdersComponent implements AfterViewInit, OnInit{
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private orders: OrderService
+  ) { }
+
+  ngOnInit(): void {
+    this.getOrders();
+  }
+
+  orderDisplayedColumns: string[] = ['ordernum', 'callname', 'orders', 'time', 'ready'];
   orderSource = new MatTableDataSource<OrdersTable>(ORDER_DATA);
 
-  readyDisplayedColumns: string[] = ['orderNum', 'client', 'delete'];
+  readyDisplayedColumns: string[] = ['ordernum', 'callname', 'delete'];
   readySource = new MatTableDataSource<ReadyTable>(READY_DATA);
-
-  constructor(public dialog: MatDialog) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.orderSource.paginator = this.paginator;
   }
-  
+
+  getOrders()
+  {
+    this.orders.getOrders((result: any) => {
+      if (result != false)
+      {
+        console.log(result);
+        this.orderSource.data = result;
+      }
+      return null;
+    });
+  }
+
   setReadyOrder(table: OrdersTable) {
-    this.readySource.data.push({orderNum: table.orderNum, client: table.client, delete: table.orderNum})
+    this.readySource.data.push({ordernum: table.ordernum, callname: table.callname, delete: table.ordernum})
     this.readySource = new MatTableDataSource<ReadyTable>(
       this.readySource.data
     );
-    var new_order = this.orderSource.data.filter(item => item.orderNum != table.orderNum);
+    var new_order = this.orderSource.data.filter(item => item.ordernum != table.ordernum);
     this.orderSource.data = new_order;
   }
 
-  openDialog(orderForModal: any, infoForModal: any) {
+  openDialog(orderForModal: any) {
     this.dialog.open(OrdersModal, {
       data: {
-        order: orderForModal,
-        info: infoForModal
+        order: orderForModal
       }
     });
   }
 
-  deleteItem(id: number) {
-    var new_ready = this.readySource.data.filter(item => item.orderNum != id);
+  deleteItem(id: number, name: string) {
+    this.orders.deleteOrder({
+        userid: id,
+        callname: name
+      },
+      (result: any) => {
+        console.log(result);
+      }
+    );
+
+    var new_ready = this.readySource.data.filter(item => item.ordernum != id);
     this.readySource.data = new_ready;
   }
 }
@@ -84,5 +103,5 @@ export class OrdersComponent implements AfterViewInit{
   imports: [MatDialogModule, MatButtonModule],
 })
 export class OrdersModal {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {order: string, info: string}) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {order: any}) { }
 }

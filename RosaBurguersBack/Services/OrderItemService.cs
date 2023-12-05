@@ -18,12 +18,12 @@ public class OrderItemService : IOrderItemService
 
     public async Task Add(OrderItemData data, int orderID)
     {
-        ItensPedido itens = new ItensPedido();
+        ItensPedido item = new ItensPedido();
 
-        itens.Produto = data.productID;
-        itens.Pedido = orderID;
+        item.Produto = data.productID;
+        item.Pedido = orderID;
 
-        this.ctx.Add(itens);
+        this.ctx.Add(item);
         await this.ctx.SaveChangesAsync();
     }
 
@@ -39,5 +39,21 @@ public class OrderItemService : IOrderItemService
             };
         
         return await query.ToListAsync();
+    }
+
+    public async Task DeleteByOrderID(int id)
+    {
+        var query =
+            from item in this.ctx.ItensPedidos
+            where item.Pedido == id
+            select item;
+        
+        var itemList = await query.ToListAsync();
+        foreach (var item in itemList)
+        {
+            this.ctx.Remove(item);
+        }
+
+        await this.ctx.SaveChangesAsync();
     }
 }

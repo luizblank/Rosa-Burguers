@@ -3,9 +3,10 @@ using System.Collections.Generic;
 namespace DTO;
 
 public class GetOrderData {
-    public int NumPedido { get; set; }
+    public int userid { get; set; }
+    public int ordernum { get; set; }
 
-    public string NomeChamada { get; set; }
+    public string callname { get; set; }
 
-    public List<ProductData> ItensPedidos { get; set; } = new List<ProductData>();
+    public List<ProductData> orders { get; set; } = new List<ProductData>();
 }

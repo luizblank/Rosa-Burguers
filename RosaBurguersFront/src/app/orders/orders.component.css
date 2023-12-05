@@ -26,7 +26,12 @@ main {
 
 .modal-style h2 {
     font-weight: 800;
+    margin-bottom: 0;
     color: #e91e63;
+}
+
+.modal-style .item-sep {
+    margin-bottom: 20px;
 }
 
 .mat-elevation-z8 {
@@ -41,3 +46,4 @@ main {
 .ready-table {
     margin-left: auto;
 }
+
