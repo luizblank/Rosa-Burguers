@@ -1,6 +1,6 @@
 <nav>
     <div class="logo-centralize">
-        <a href="" (click)="goToLogin()"><img src="../assets/Rosa Burguers White.png" class="logo" alt="logo"></a>
+        <img src="../assets/Rosa Burguers White.png" class="logo" alt="logo">
     </div>
     @if(admLogin)
     {
@@ -10,12 +10,12 @@
                 Gerenciar
             </li>
         </a>
-        <a class="links">
+        <a class="links" (click)="goToTotem()">
             <li>
                 Totem
             </li>
         </a>
-        <a class="links" href="" (click)="goToOrders()">
+        <a class="links" (click)="goToOrders()">
             <li>
                 Pedidos
             </li>

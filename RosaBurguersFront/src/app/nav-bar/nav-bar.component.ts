@@ -24,4 +24,8 @@ export class NavBarComponent{
   goToOrders() {
     this.router.navigate(['adm/orders']);
   }
+
+  goToTotem() {
+    this.router.navigate(['adm/totem']);
+  }
 }

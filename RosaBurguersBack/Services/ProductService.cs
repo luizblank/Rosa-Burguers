@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using DTO;
 using RosaBurguersBack.Model;
+using System.Collections.Generic;
 
 namespace RosaBurguersBack.Services;
 
@@ -23,6 +24,7 @@ public class ProductService : IProductService
         produto.Descricao = data.description.ToLower();
         produto.Tipo = data.type.ToLower();
         produto.Preco = data.price;
+        produto.Tamanho = data.size;
 
         this.ctx.Add(produto);
         await this.ctx.SaveChangesAsync();
@@ -46,6 +48,16 @@ public class ProductService : IProductService
             select product;
 
         return await query.FirstOrDefaultAsync();
+    }
+
+    public Task<List<Produto>> GetProductsByType(string type)
+    {
+        var query =
+            from product in this.ctx.Produtos
+            where product.Tipo ==  type
+            select product;
+
+        return query.ToListAsync();
     }
 
     public ProductData ToProductData(Produto product)

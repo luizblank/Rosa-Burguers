@@ -30,4 +30,18 @@ public class ProductController : ControllerBase
         await service.Create(product);
         return Ok(true);
     }
+
+    [HttpGet("products")]
+    [EnableCors("DefaultPolicy")]
+    public async Task<IActionResult> GetProducts(
+        [FromServices]IProductService productService
+    )
+    {
+        var hamburgueres = await productService.GetProductsByType("hamburgueres");
+        var porcoes = await productService.GetProductsByType("porcoes");
+        var bebidas = await productService.GetProductsByType("bebidas");
+        var sobremesas = await productService.GetProductsByType("sobremesas");
+
+        return Ok(new { hamburgueres, porcoes, bebidas, sobremesas });
+    }
 }

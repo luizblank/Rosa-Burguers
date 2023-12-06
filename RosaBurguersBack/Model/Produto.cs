@@ -15,5 +15,7 @@ public partial class Produto
 
     public double Preco { get; set; }
 
+    public string Tamanho { get; set; }
+
     public virtual ICollection<ItensPedido> ItensPedidos { get; set; } = new List<ItensPedido>();
 }

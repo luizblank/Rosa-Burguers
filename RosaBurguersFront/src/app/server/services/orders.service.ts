@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BackEndService } from './backend.service';
-import { catchError } from 'rxjs';
-import { ClientData } from '../data/client-data';
-import { ClientLogin } from '../data/client-login';
-import { VerifyData } from '../data/verify-data';
 import { OrderData } from '../data/order-data';
 
 @Injectable({

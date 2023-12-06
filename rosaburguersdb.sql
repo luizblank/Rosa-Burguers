@@ -34,7 +34,8 @@ create table Produto(
 	Nome varchar(100) not null,
 	Descricao varchar(MAX) not null,
 	Tipo varchar (20) not null,
-	Preco float not null
+	Preco float not null,
+	Tamanho varchar (20)
 );
 go
 
@@ -53,25 +54,16 @@ create table ItensPedido(
 );
 
 insert into Usuario values ('Administrador', CONVERT(datetime, '25-08-2017'), 'Outro', 'rosaburguers@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 1);
-go
-
 insert into Usuario values ('Luiz Antonio', CONVERT(datetime, '25-08-2017'), 'Masculino', 'luizrosa@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 0);
-go
-
 insert into Usuario values ('Vitória Zago', CONVERT(datetime, '25-08-2017'), 'Feminino', 'zago@gmail.com', 'i+2C5BZkV/+BzzMq3LGN0ZOfL9nKi/hHNWiAPTq2boY=', 'kM8Xgn5lIYzcjEP/9tPHrYlpG9zyLGSG', 0);
-go
 
-insert into Produto values ('batata', 'batata frita com sal', 'porção', 4.99);
-go
+insert into Produto values ('batata', 'batata frita com sal', 'porcoes', 4.99, 'grande');
+insert into Produto values ('refrigerante', 'free refill', 'bebidas', 6.99, 'grande');
+insert into Produto values ('rosa burguer', 'pão rosa, duas carnes, queijo cheddar, molho especial', 'hamburgueres',16.99, null);
+insert into Produto values ('donut burguer', 'massa de donut usada de pão, açucar, recheio de chocolate', 'hamburgueres', 20.99, null);
+insert into Produto values ('patrick burguer', 'hamburguer do siri cascudo, recheio especial do patrick', 'hamburgueres', 34.99, null);
 
-insert into Produto values ('refrigerante', 'free refill', 'bebida', 6.99);
-go
-
-insert into Produto values ('rosa burguer', 'pão rosa, duas carnes, queijo cheddar, molho especial', 'hamburguer',16.99);
-go
-
-insert into Produto values ('donut Burguer', 'massa de donut usada de pão, açucar, recheio de chocolate', 'hamburguer', 20.99);
-go
+insert into Produto values ('pink sundae', 'sorvete de baunilha com cobertura rosa', 'sobremesas', 16.89, null);
 
 select * from Usuario
 go

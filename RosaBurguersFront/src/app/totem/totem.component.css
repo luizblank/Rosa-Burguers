@@ -13,6 +13,7 @@ main {
     justify-content: center;
     align-items: center; 
     flex-direction: column;
+    padding-bottom: 30%;
 }
 
 .title {
@@ -32,6 +33,10 @@ main {
 a {
     text-decoration: none;
     margin: 0 20px 20px 0;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 .card {
@@ -85,4 +90,96 @@ a .card:hover {
     word-wrap: break-word;      /* IE 5.5-7 */
     white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
     white-space: pre-wrap;      /* current browsers */
+}
+
+.order-menu {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    background-color: white;
+    width: 100%;
+    height: 15%;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    bottom: 0;
+    border-top: 1px solid #e91e63;
+    padding: 30px;
+}
+
+.title-organize {
+    display: flex;
+}
+
+.order-title {
+    padding-top: 16px;
+    font-size: 3.2em;
+    font-weight: 800;
+    color: #e91e63;
+}
+
+.title-organize img {
+    width: 3.2em;
+    margin-bottom: 20px;
+}
+
+.orders-sep {
+    width: 50%;
+    padding: 10px;
+}
+
+.orders {
+    height: 10em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.order {
+    background-color: #e91e63;
+    font-size: 1.6em;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 10px 10px 0;
+}
+
+.confirmation-sep {
+    width: 50%;
+    padding: 10px;
+}
+
+.total-value {
+    text-align: center;
+    font-size: 3.2em;
+    color: #e91e63;
+    margin: 30px;
+}
+
+.confirmation-button {
+    background-color: #e91e63;
+    width: 100%;
+    font-size: 3.2em;
+    height: 50%;
+    border-radius: 10px;
+    border: 0;
+}
+
+.confirmation-button:disabled {
+    background-color: #595959;
+}
+
+.product {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-label {
+    font-size: 1.6em;
+    margin-bottom: 5px;
+}
+
+mat-select {
+    font-size: 1.6em;
+}
+
+mat-option {
+    font-size: 1.6em;
 }

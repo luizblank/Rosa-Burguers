@@ -4,7 +4,7 @@
     <div class="title">Hamburgueres</div>
     <div class="option">
         @for (item of produtos.hamburgueres; track $index) {
-            <a>
+            <a (click)="setPedido(item)">
                 <div class="card">
                     <img src="../assets/rosa.jpg" alt="Food Image">
                     <div class="text-area">
@@ -25,7 +25,7 @@
     <div class="title">Porções</div>
     <div class="option">
         @for (item of produtos.porcoes; track $index) {
-            <a>
+            <a (click)="setPedido(item)">
                 <div class="card">
                     <img src="../assets/rosa.jpg" alt="Food Image">
                     <div class="text-area">
@@ -46,7 +46,7 @@
     <div class="title">Bebidas</div>
     <div class="option">
         @for (item of produtos.bebidas; track $index) {
-            <a>
+            <a (click)="setPedido(item)">
                 <div class="card">
                     <img src="../assets/rosa.jpg" alt="Food Image">
                     <div class="text-area">
@@ -67,7 +67,7 @@
     <div class="title">Sobremesas</div>
     <div class="option">
         @for (item of produtos.sobremesas; track $index) {
-            <a>
+            <a (click)="setPedido(item)">
                 <div class="card">
                     <img src="../assets/rosa.jpg" alt="Food Image">
                     <div class="text-area">
@@ -86,3 +86,33 @@
         }
     </div>
 </main>
+
+<div class="order-menu">
+    <div class="orders-sep">
+        <div class="title-organize">
+            <div class="order-title">Carrinho</div>
+            <img src="../assets/shop.png">
+        </div>
+        <div class="orders">
+            @if (pedidos.length > 0) {
+                @for (item of pedidos; track $index) {
+                    <div class="order">
+                        <div class="product">
+                            <div>{{capitalizeText(item.nome)}}</div>
+                            <div>{{item.preco}}</div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="confirmation-sep">
+        <div class="total-value">R$ {{getTotalValue()}}</div>
+        @if (pedidos.length > 0) {
+            <button class="confirmation-button" (click)="openDialog()">Pagamento</button>
+        }
+        @else {
+            <button class="confirmation-button" disabled>Pagamento</button>
+        }
+    </div>
+</div>

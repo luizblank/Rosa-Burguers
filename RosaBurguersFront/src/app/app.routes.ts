@@ -4,6 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UserComponent } from './user/user.component';
 import { yourGuardGuard } from './your-guard.guard';
+import { TotemComponent } from './totem/totem.component';
 
 export const routes: Routes = [
     { 
@@ -19,7 +20,8 @@ export const routes: Routes = [
     {
         path: 'adm',
         children: [
-            { path: 'orders', component: OrdersComponent }
+            { path: 'orders', component: OrdersComponent },
+            { path: 'totem', component: TotemComponent }
         ]
     },
     {
