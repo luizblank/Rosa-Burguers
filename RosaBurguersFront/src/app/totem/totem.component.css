@@ -176,6 +176,10 @@ a .card:hover {
     border: 0;
 }
 
+.modal-button:disabled {
+    background-color: #595959;
+}
+
 .product {
     display: flex;
     justify-content: space-between;

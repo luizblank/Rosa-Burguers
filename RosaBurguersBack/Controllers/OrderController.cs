@@ -46,23 +46,30 @@ public class OrderController : ControllerBase
 
     [HttpPost("create")]
     [EnableCors("DefaultPolicy")]
-    public async Task Create(
-        string jwt,
+    public async Task<IActionResult> Create(
+        [FromBody]CreateOrderData createOrderData,
         [FromServices]IUserService userService,
         [FromServices]IOrderService orderService,
+        [FromServices]ISecurityService securityService,
         [FromServices]CryptoService crypto
     )
     {
         OrderData order = new OrderData();
-        var value = crypto.Validate<JwtPayload>(jwt);
-
+        var value = crypto.Validate<JwtPayload>(createOrderData.jwt);
+        
         var user = await userService
             .GetUserByID(value.id);
 
+        var code = await securityService.GenerateSalt();
         order.userid = user.Id;
-        order.callname = user.Nome;
+        order.callname = createOrderData.name;
+        order.code = code;
 
         await orderService.Create(order);
+        var newOrder = await orderService
+            .GetOrderByCode(code);
+            
+        return Ok(newOrder.Id);
     }
 
     [HttpPost("delete")]

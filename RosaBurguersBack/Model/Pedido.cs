@@ -7,6 +7,8 @@ public partial class Pedido
 {
     public int Id { get; set; }
 
+    public string Codigo { get; set; }
+
     public int Usuario { get; set; }
 
     public string NomeChamada { get; set; }

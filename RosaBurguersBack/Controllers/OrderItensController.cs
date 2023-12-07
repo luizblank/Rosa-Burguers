@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace RosaBurguersBack.Controllers;
 
+using System.Runtime.CompilerServices;
 using DTO;
 using RosaBurguersBack.Services;
 using Trevisharp.Security.Jwt;
@@ -25,19 +26,10 @@ public class OrderItensController : ControllerBase
         [FromServices]CryptoService crypto
     )
     {
-        OrderController order = new OrderController();
-        var value = crypto.Validate<JwtPayload>(orderItem.jwt);
         var getOrder = await orderService
-            .GetOrderByUser(value.id);
-
-        if (getOrder is null)
-        {
-            await order.Create(orderItem.jwt, userService, orderService, crypto);
-            getOrder = await orderService
-                .GetOrderByUser(value.id);
-        }
-
-        await orderItemService.Add(orderItem, getOrder.Id);
+            .GetOrderByID(orderItem.orderid);
+    
+        await orderItemService.Add(orderItem.productid, getOrder.Id);
         return Ok();
     }
 }

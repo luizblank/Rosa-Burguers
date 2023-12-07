@@ -1,4 +1,4 @@
 export interface addItensData {
-    jwt: string,
-    productid: number
+    productid: number,
+    orderid: number
 }

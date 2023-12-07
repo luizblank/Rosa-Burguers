@@ -4,7 +4,7 @@ mat-label {
 
 main {
     display: flex;
-    margin-top: 5%;
+    margin-top: 50%;
     flex-direction: column;
     justify-content: center;
     align-items: center;

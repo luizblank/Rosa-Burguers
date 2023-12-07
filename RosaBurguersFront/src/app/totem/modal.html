@@ -18,17 +18,31 @@
         </div>
     </div>
     <div class="payment-session">
-        Forma de pagamento
         <mat-form-field style="width: 100%; padding-right: 10px; height: auto;">
-            <mat-select [(value)]="selected">
-              <mat-option value="money">Dinheiro</mat-option>
-              <mat-option value="debit">Cartão de crédito</mat-option>
-              <mat-option value="credit">Cartão de débito</mat-option>
-              <mat-option value="pix">PIX</mat-option>
-            </mat-select>
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput [formControl]="name" required>
+            @if (name.invalid) {
+            <mat-error style="font-size: 1.2em;">{{getNameErrorMessage()}}</mat-error>}
         </mat-form-field>
-    
-        <button class="modal-button" (click)="makeOrder()">Concluir</button>
+
+        <div>
+            Forma de pagamento
+            <mat-form-field style="width: 100%; padding-right: 10px; height: auto;">
+                <mat-select [(value)]="selected">
+                  <mat-option value="money">Dinheiro</mat-option>
+                  <mat-option value="debit">Cartão de crédito</mat-option>
+                  <mat-option value="credit">Cartão de débito</mat-option>
+                  <mat-option value="pix">PIX</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        
+        @if (name.valid) {
+            <button class="modal-button" (click)="makeOrder()">Concluir</button>
+        }
+        @else {
+            <button class="modal-button" disabled>Concluir</button>
+        }
     </div>
 </mat-dialog-content>
 

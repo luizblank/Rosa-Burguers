@@ -41,6 +41,7 @@ go
 
 create table Pedido(
 	ID int identity primary key,
+	Codigo varchar(100) not null,
 	Usuario int references Usuario(ID) not null,
 	NomeChamada  varchar(50) not null,
 	Horario time

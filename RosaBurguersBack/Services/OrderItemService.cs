@@ -16,11 +16,11 @@ public class OrderItemService : IOrderItemService
         this.ctx = ctx;
     }
 
-    public async Task Add(OrderItemData data, int orderID)
+    public async Task Add(int productID, int orderID)
     {
         ItensPedido item = new ItensPedido();
 
-        item.Produto = data.productid;
+        item.Produto = productID;
         item.Pedido = orderID;
 
         this.ctx.Add(item);

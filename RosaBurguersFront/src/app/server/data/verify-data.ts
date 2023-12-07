@@ -1,3 +1,3 @@
 export interface VerifyData {
-    jwt: String;
+    jwt: string
 }

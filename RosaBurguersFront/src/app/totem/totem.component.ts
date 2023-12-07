@@ -9,8 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
-import { OrderItens } from '../server/services/add-itens.service';
+import { FormControl, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
+import { OrderItensService } from '../server/services/order-itens-service';
+import { OrderService } from '../server/services/orders.service';
 
 @Component({
   selector: 'app-totem',
@@ -27,7 +28,7 @@ export class TotemComponent implements OnInit{
   constructor(
     private route: Router,
     public dialog: MatDialog,
-    private product: ProductService
+    private product: ProductService,
   ){}
   
   pedidos:any = [];
@@ -99,18 +100,27 @@ export class TotemComponent implements OnInit{
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatInputModule, 
+    FormsModule, 
+    ReactiveFormsModule
   ],
   standalone: true,
 })
 export class OrdersModal {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { order: any, price: any },
-    private orderItens: OrderItens,
+    private orderItens: OrderItensService,
+    private order: OrderService,
     public dialog: MatDialog) { }
   
   selected = 'money';
+  name = new FormControl('', [Validators.required]);
 
-  makeOrder() {
+  getNameErrorMessage() {
+    return this.name.hasError('required') ? 'Você deve digitar seu nome' : '';
+  }
+
+  async makeOrder() {
     var session = sessionStorage.getItem('jwt');
     if (session != null)
     {
@@ -118,18 +128,21 @@ export class OrdersModal {
       if (jsonSession != null)
       {
         var jwt = jsonSession.jwt;
-        this.data.order.forEach((item: { id: number; }) => {
-          this.orderItens.addItens({
-            jwt: jwt, 
-            productid: item.id
-          }, (result:any) => {
-            console.log(result);
-          })
-        });
+        if (this.name.value != null)
+          await this.order.createOrder({jwt: jwt, name: this.name.value}, (result:any) => {
+            this.data.order.forEach((item: { id: number; }) => {
+              console.log(item.id);
+              this.orderItens.addItens({
+                  productid: item.id, 
+                  orderid: result
+                }, (result: any) => {
+                console.log(result);
+                window.location.reload();
+              })
+            });
+          });
       }
     }
-    
-    window.location.reload();
   }
 
   capitalizeText(text: string)

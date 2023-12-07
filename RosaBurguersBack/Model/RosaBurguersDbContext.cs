@@ -26,13 +26,14 @@ public partial class RosaBurguersDbContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=CT-C-001YT\\SQLEXPRESS02;Initial Catalog=RosaBurguersDB;Integrated Security=True;Trust Server Certificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Imagem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Imagem__3214EC279CAC7849");
+            entity.HasKey(e => e.Id).HasName("PK__Imagem__3214EC27A5B56431");
 
             entity.ToTable("Imagem");
 
@@ -42,7 +43,7 @@ public partial class RosaBurguersDbContext : DbContext
 
         modelBuilder.Entity<ItensPedido>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ItensPed__3214EC272AEAF3A1");
+            entity.HasKey(e => e.Id).HasName("PK__ItensPed__3214EC27944E6C50");
 
             entity.ToTable("ItensPedido");
 
@@ -61,11 +62,15 @@ public partial class RosaBurguersDbContext : DbContext
 
         modelBuilder.Entity<Pedido>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pedido__3214EC2722F95D0F");
+            entity.HasKey(e => e.Id).HasName("PK__Pedido__3214EC2744CE7359");
 
             entity.ToTable("Pedido");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Codigo)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode(false);
             entity.Property(e => e.NomeChamada)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -79,7 +84,7 @@ public partial class RosaBurguersDbContext : DbContext
 
         modelBuilder.Entity<Produto>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Produto__3214EC279AC8F911");
+            entity.HasKey(e => e.Id).HasName("PK__Produto__3214EC279EF7D099");
 
             entity.ToTable("Produto");
 
@@ -102,7 +107,7 @@ public partial class RosaBurguersDbContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC2799DE94E7");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC2729A9B952");
 
             entity.ToTable("Usuario");
 

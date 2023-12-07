@@ -5,6 +5,7 @@ using DTO;
 using RosaBurguersBack.Model;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System.Collections.Generic;
+using System;
 
 namespace RosaBurguersBack.Services;
 
@@ -23,8 +24,9 @@ public class OrderService : IOrderService
 
         pedido.Usuario = data.userid;
         pedido.NomeChamada = data.callname;
+        pedido.Codigo = data.code;
 
-        this.ctx.Add(pedido);
+        var newOrder = this.ctx.Add(pedido);
         await this.ctx.SaveChangesAsync();
     }
 
@@ -32,6 +34,16 @@ public class OrderService : IOrderService
     {
         this.ctx.Remove(pedido);
         await this.ctx.SaveChangesAsync();
+    }
+
+    public async Task<Pedido> GetOrderByCode(string code)
+    {
+        var query =
+            from order in this.ctx.Pedidos
+            where order.Codigo == code
+            select order;
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<Pedido> GetOrderByID(int id)
