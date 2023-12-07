@@ -68,6 +68,10 @@ export class TotemComponent implements OnInit{
     this.pedidos.push(item);
   }
 
+  parseFloat(num: number) {
+    return num.toFixed(2);
+  }
+
   getTotalValue() {
     var totalValue = 0.00;
     if (this.pedidos.length > 0)
