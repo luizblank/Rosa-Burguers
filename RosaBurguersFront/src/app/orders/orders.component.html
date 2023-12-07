@@ -7,19 +7,19 @@
         <div>
             <div class="title">Preparando</div>
             <div>
-                <table mat-table [dataSource]="orderSource" class="mat-elevation-z8">
+                <table mat-table [dataSource]="orderSource.filteredData|slice:0:5" class="mat-elevation-z8">
                     <ng-container matColumnDef="ordernum">
-                        <th mat-header-cell *matHeaderCellDef> Nº do pedido</th>
+                        <th mat-header-cell *matHeaderCellDef>Nº do pedido</th>
                         <td mat-cell *matCellDef="let element"> {{element.ordernum}} </td>
                     </ng-container>
     
                     <ng-container matColumnDef="callname">
-                        <th mat-header-cell *matHeaderCellDef> Cliente </th>
+                        <th mat-header-cell *matHeaderCellDef>Cliente</th>
                         <td mat-cell *matCellDef="let element"> {{firstNameOnly(element.callname)}} </td>
                     </ng-container>
     
                     <ng-container matColumnDef="orders">
-                        <th mat-header-cell *matHeaderCellDef> Pedido </th>
+                        <th mat-header-cell *matHeaderCellDef>Pedido</th>
                         <td mat-cell *matCellDef="let element">
                             <button class="confirmation-button" mat-raised-button color="primary"
                                 (click)="openDialog(element.orders)">Abrir</button>
@@ -27,7 +27,7 @@
                     </ng-container>
     
                     <ng-container matColumnDef="time">
-                        <th mat-header-cell *matHeaderCellDef> Horário </th>
+                        <th mat-header-cell *matHeaderCellDef>Horário</th>
                         <td mat-cell *matCellDef="let element"> {{element.time}} </td>
                     </ng-container>
     
@@ -42,11 +42,6 @@
                     <tr mat-header-row *matHeaderRowDef="orderDisplayedColumns" class="header"></tr>
                     <tr mat-row *matRowDef="let row; columns: orderDisplayedColumns;"></tr>
                 </table>
-                @if (orderSource.data.length > 5) {
-                    <mat-paginator id="tabela1" [pageSizeOptions]="[5]" showFirstLastButtons
-                        aria-label="Select page of orders" style="margin-top: 15px;">
-                    </mat-paginator>
-                }
             </div>
         </div>
     </div>
