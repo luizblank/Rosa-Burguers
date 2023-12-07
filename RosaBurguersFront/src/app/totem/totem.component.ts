@@ -93,6 +93,26 @@ export class TotemComponent implements OnInit{
       }
     });
   }
+
+  resumeTitle(text: string)
+  {
+    if (text.length >= 20)
+    {
+      var textSliced = this.capitalizeText(text.slice(0,17)) + '...'
+      return textSliced;
+    }
+    return this.capitalizeText(text);
+  }
+
+  resumeText(text: string)
+  {
+    if (text.length >= 60)
+    {
+      var textSliced = this.capitalizeText(text.slice(0,57)) + '...'
+      return textSliced;
+    }
+    return this.capitalizeText(text);
+  }
 }
 
 @Component({
@@ -167,5 +187,11 @@ export class OrdersModal {
     newText = textSplitted[0].charAt(0).toUpperCase() + newText;
     newText = newText + text;
     return newText;
+  }
+
+  resumeTitle(text: string)
+  {
+    var textSliced = this.capitalizeText(text.slice(0,17)) + '...'
+    return textSliced;
   }
 }
