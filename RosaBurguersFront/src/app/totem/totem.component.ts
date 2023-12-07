@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { OrderItens } from '../server/services/add-itens.service';
 
 @Component({
   selector: 'app-totem',
@@ -102,9 +103,34 @@ export class TotemComponent implements OnInit{
   standalone: true,
 })
 export class OrdersModal {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { order: any, price: any }) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { order: any, price: any },
+    private orderItens: OrderItens,
+    public dialog: MatDialog) { }
   
   selected = 'money';
+
+  makeOrder() {
+    var session = sessionStorage.getItem('jwt');
+    if (session != null)
+    {
+      var jsonSession = JSON.parse(session);
+      if (jsonSession != null)
+      {
+        var jwt = jsonSession.jwt;
+        this.data.order.forEach((item: { id: number; }) => {
+          this.orderItens.addItens({
+            jwt: jwt, 
+            productid: item.id
+          }, (result:any) => {
+            console.log(result);
+          })
+        });
+      }
+    }
+    
+    window.location.reload();
+  }
 
   capitalizeText(text: string)
   {

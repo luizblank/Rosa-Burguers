@@ -1,8 +1,8 @@
 <mat-dialog-actions style="display: flex; justify-content: end;">
     <button mat-button mat-dialog-close>𐌢</button>
 </mat-dialog-actions>
-<mat-dialog-content class="mat-typography modal-style" style="overflow: hidden;">
-    <div class="title" style="margin-top: 0;">Resumo do pedido</div>
+<mat-dialog-content class="mat-typography modal-style" style="overflow-x: hidden;">
+    <div class="title" style="margin-top: 0; text-align: center;">Resumo do pedido</div>
     @for (item of data.order; track $index) {
         <div class="order">
             <div class="product">
@@ -11,16 +11,24 @@
             </div>
         </div>
     }
-    Forma de pagamento
-    <mat-form-field style="width: 100%; padding-right: 10px; height: auto;">
-        <mat-select [(value)]="selected">
-          <mat-option value="money">Dinheiro</mat-option>
-          <mat-option value="debit">Cartão de crédito</mat-option>
-          <mat-option value="credit">Cartão de débito</mat-option>
-          <mat-option value="pix">PIX</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <button class="confirmation-button">Concluir</button>
+    <div class="order" style="background-color: #595959;">
+        <div class="product">
+            <div>Total</div>
+            <div>{{data.price}}</div>
+        </div>
+    </div>
+    <div class="payment-session">
+        Forma de pagamento
+        <mat-form-field style="width: 100%; padding-right: 10px; height: auto;">
+            <mat-select [(value)]="selected">
+              <mat-option value="money">Dinheiro</mat-option>
+              <mat-option value="debit">Cartão de crédito</mat-option>
+              <mat-option value="credit">Cartão de débito</mat-option>
+              <mat-option value="pix">PIX</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <button class="modal-button" (click)="makeOrder()">Concluir</button>
+    </div>
 </mat-dialog-content>
 

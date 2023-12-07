@@ -1,5 +1,6 @@
 namespace DTO;
 
 public class OrderItemData {
-    public int productID { get; set; }
+    public string jwt { get; set; }
+    public int productid { get; set; }
 }

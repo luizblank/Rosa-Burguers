@@ -18,7 +18,6 @@ public class OrderItensController : ControllerBase
     [HttpPost("add")]
     [EnableCors("DefaultPolicy")]
     public async Task<IActionResult> Add(
-        string jwt,
         [FromBody]OrderItemData orderItem,
         [FromServices]IOrderItemService orderItemService,
         [FromServices]IUserService userService,
@@ -27,13 +26,13 @@ public class OrderItensController : ControllerBase
     )
     {
         OrderController order = new OrderController();
-        var value = crypto.Validate<JwtPayload>(jwt);
+        var value = crypto.Validate<JwtPayload>(orderItem.jwt);
         var getOrder = await orderService
             .GetOrderByUser(value.id);
 
         if (getOrder is null)
         {
-            await order.Create(jwt, userService, orderService, crypto);
+            await order.Create(orderItem.jwt, userService, orderService, crypto);
             getOrder = await orderService
                 .GetOrderByUser(value.id);
         }

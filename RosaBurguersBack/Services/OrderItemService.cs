@@ -20,7 +20,7 @@ public class OrderItemService : IOrderItemService
     {
         ItensPedido item = new ItensPedido();
 
-        item.Produto = data.productID;
+        item.Produto = data.productid;
         item.Pedido = orderID;
 
         this.ctx.Add(item);
