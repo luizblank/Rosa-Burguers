@@ -99,7 +99,12 @@
                     <div class="order">
                         <div class="product">
                             <div>{{capitalizeText(item.nome)}}</div>
-                            <div>{{item.preco}}</div>
+                            <div class="final-line-product">
+                                <div>{{item.preco}}</div>
+                                <button class="delete-button" mat-icon-button color="warn" (click)="deleteItem(item.id)">
+                                    <mat-icon>delete_forever</mat-icon>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 }

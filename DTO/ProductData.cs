@@ -5,5 +5,5 @@ public class ProductData {
     public string description { get; set; }
     public string type { get; set; }
     public double price { get; set; }
-    public string size { get; set; } = null;
+    public string size { get; set; }
 }

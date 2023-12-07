@@ -28,4 +28,8 @@ export class NavBarComponent{
   goToTotem() {
     this.router.navigate(['adm/totem']);
   }
+
+  goToProdutos() {
+    this.router.navigate(['adm/products'])
+  }
 }

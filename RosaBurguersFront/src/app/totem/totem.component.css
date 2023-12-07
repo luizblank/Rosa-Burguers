@@ -45,6 +45,7 @@ a:hover {
     flex-direction: column;
     border-radius: 10px;
     width: 250px;
+    height: 350px;
 }
 
 .card img {
@@ -78,8 +79,11 @@ a:hover {
     font-weight: 800;
     padding: 10px;
     border-radius: 10px;
-    margin-top: 10px;
+    margin-bottom: 10px;
     background-color: #e91e63;
+    bottom: 0;
+    position: absolute;
+    width: 91%;
 }
 
 a .card:hover {
@@ -183,10 +187,23 @@ a .card:hover {
 .product {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.final-line-product {
+    display: flex;
+    align-items: center;
 }
 
 .payment-session {
     margin-top: 50px;
+}
+
+.delete-button {
+    padding: 0;
+    margin: 0 0 0 5px;
+    background-color: #e91e63;
+    border: #e91e63
 }
 
 mat-label {

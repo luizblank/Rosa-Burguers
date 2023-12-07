@@ -34,16 +34,16 @@ Obs: 'Tem tela/Tem Interface' = Possui parte visual, mesmo sem funcionar.
 - [X] Projeto do Frontend Angular Criado.
 - [X] Possui tela de Login.
 - [X] Possui tela de cadastro.
-- [ ] Possui tela de usuário normal das promoções.
+- [X] Possui tela de usuário normal das promoções.
 - [ ] Possui tela para visualizar código da promoção.
-- [ ] Possui tela de Administrador.
+- [X] Possui tela de Administrador.
 - [X] Possui tela de Pedidos.
-- [ ] Possui tela de Cadastro de Produtos.
+- [X] Possui tela de Cadastro de Produtos.
 - [ ] Possui tela de Cadastro de Promoções.
-- [ ] Possui tela do totem.
+- [X] Possui tela do totem.
 - [ ] Possui tela dos gráficos.
 - [ ] Tela do totem tem interface para inserção de código da promoção.
-- [ ] Tela do totem tem interface para colocar itens na sacola.
+- [X] Tela do totem tem interface para colocar itens na sacola.
 - [X] Banco de dados criado com tabelas de Usuário, Pedido, ItemPedido, Produto, Promoção ou similar.
 - [X] Rotas no Frontend Configuradas.
 - [X] Projeto Backend C# criado.
@@ -59,20 +59,20 @@ Obs: 'Tem tela/Tem Interface' = Possui parte visual, mesmo sem funcionar.
 - [X] Login retorna JWT para o frontend que o guarda no Session Storage.
 - [X] Após o Login a página de usuário normal ou adm é mostrada corretamente.
 - [ ] Adm é capaz de ver produtos existentes.
-- [ ] Adm é capaz de cadastrar novos produtos.
+- [X] Adm é capaz de cadastrar novos produtos.
 - [ ] Adm é capaz de ver promoções existentes.
 - [ ] Adm é capaz de criar novas promoções.
 - [ ] Adm é capaz de ver Dashboard com dois gráficos de informações.
 - [ ] Gráficos do Dashboard realmente refletem os dados no banco.
-- [ ] É possível ver produtos existentes no Totem.
-- [ ] É possível adicionar itens em uma sacola.
-- [ ] Ao finalizar a compra o pedido é realmente registrado no banco de dados.
-- [ ] É possível ver o custo total do pedido.
+- [X] É possível ver produtos existentes no Totem.
+- [X] É possível adicionar itens em uma sacola.
+- [X] Ao finalizar a compra o pedido é realmente registrado no banco de dados.
+- [X] É possível ver o custo total do pedido.
 - [ ] É possível adicionar uma promoção com um código promocional.
 - [ ] Promoção afeta o custo total do pedido.
 - [ ] Pedidos podem ser vistos na tela de pedidos.
-- [ ] É possível editar um pedido como 'Entregue' de alguma forma.
-- [ ] Apenas os pedidos corretos aparecem na tela de pedidos (finalizados, porém não entregues).
+- [X] É possível editar um pedido como 'Entregue' de alguma forma.
+- [X] Apenas os pedidos corretos aparecem na tela de pedidos (finalizados, porém não entregues).
 - [ ] Usuário é capaz de ver as promoções no sistema.
 - [ ] Usuário é capaz de gerar um código de promoção válido.
 - [ ] Sistema realmente válida código de promoção.

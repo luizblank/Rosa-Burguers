@@ -1,0 +1,75 @@
+<nav>
+    <app-nav-bar [admLogin]="true"/>
+</nav>
+
+<main>
+    <div class="title">Registro de produto</div>
+
+    <div class="form">
+        <mat-form-field>
+            <mat-label>Nome do produto</mat-label>
+            <input type="text" matInput [formControl]="name" required>
+            @if (name.invalid) {
+            <mat-error>{{getNameErrorMessage()}}</mat-error>}
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Preço</mat-label>
+            <input type="number" matInput [formControl]="price" required>
+            @if (price.invalid) {
+            <mat-error>{{getPriceErrorMessage()}}</mat-error>}
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Tipo</mat-label>
+            <mat-select [formControl]="type" required>
+                <mat-option value="hamburgueres">Hamburguer</mat-option>
+                <mat-option value="porcoes">Porção</mat-option>
+                <mat-option value="bebidas">Bebida</mat-option>
+                <mat-option value="sobremesas">Sobremesa</mat-option>
+            </mat-select>
+            @if (type.invalid) {
+            <mat-error>{{getTypeErrorMessage()}}</mat-error>  
+            }
+        </mat-form-field>
+
+        @if (type.value != 'hamburgueres' && type.value != 'sobremesas' && type.value != '') {
+            <mat-form-field>
+                <mat-label>Tamanho</mat-label>
+                <mat-select [formControl]="size" required>
+                    <mat-option value="pequeno">Pequeno</mat-option>
+                    <mat-option value="médio">Médio</mat-option>
+                    <mat-option value="grande">Grande</mat-option>
+                </mat-select>
+                @if (size.invalid) {
+                <mat-error>{{getSizeErrorMessage()}}</mat-error>  
+                }
+            </mat-form-field>
+        }
+
+        <mat-form-field>
+            <mat-label>Descrição</mat-label>
+            <textarea type="textarea" [formControl]="description" matInput style="height: 100px;"></textarea>
+            @if (description.invalid) {
+                <mat-error>{{getDescriptionErrorMessage()}}</mat-error>
+            }
+        </mat-form-field>
+
+        @if (type.value != 'hamburgueres' && type.value != 'sobremesas' && type.value != '') {
+            @if (name.valid && price.valid && type.valid && size.valid && description.valid) {
+                <button class="confirmation-button" mat-raised-button color="primary" (click)="registerProduct()">Registrar</button>
+            }
+            @else {
+                <button class="confirmation-button" mat-raised-button color="primary" disabled>Registrar</button>
+            }
+        }
+        @else {
+            @if (name.valid && price.valid && type.valid && description.valid) {
+                <button class="confirmation-button" mat-raised-button color="primary" (click)="registerProduct()">Registrar</button>
+            }
+            @else {
+                <button class="confirmation-button" mat-raised-button color="primary" disabled>Registrar</button>
+            }
+        }
+    </div>
+</main>

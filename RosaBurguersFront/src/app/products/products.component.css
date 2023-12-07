@@ -1,0 +1,54 @@
+mat-label {
+    font-size: 22px!important;
+}
+
+main {
+    display: flex;
+    margin-top: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main .title {
+    font-size: 60px;
+}
+
+.form {
+    width: 500px;
+    margin-top: 50px !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.form mat-form-field {
+    margin: 0 0 10px 0;
+}
+
+.form mat-error {
+    font-size: 16px;
+}
+
+.confirmation-button {
+    font-size: 22px;
+    margin-bottom: 150px;
+    height: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    main .title {
+        font-size: 40px;
+    }
+
+    .form {
+        width: auto;
+    }
+
+    mat-label {
+        font-size: 20px!important;
+    }
+
+    .confirmation-button {
+        font-size: 20px;
+    }
+}

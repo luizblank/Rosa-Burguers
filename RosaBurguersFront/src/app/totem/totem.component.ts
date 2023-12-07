@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { OrderItensService } from '../server/services/order-itens-service';
 import { OrderService } from '../server/services/orders.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-totem',
@@ -20,6 +21,7 @@ import { OrderService } from '../server/services/orders.service';
     NavBarComponent,
     CommonModule,
     MatCardModule,
+    MatIconModule
   ],
   templateUrl: './totem.component.html',
   styleUrl: './totem.component.css'
@@ -76,6 +78,11 @@ export class TotemComponent implements OnInit{
       }
     }
     return totalValue.toFixed(2);
+  }
+
+  deleteItem(id: number) {
+    const index = this.pedidos.findIndex((item:any) => item.id == id);
+    this.pedidos.splice(index, 1);
   }
 
   openDialog() {
