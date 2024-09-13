@@ -1,6 +1,6 @@
 # Rosa Burguers
 
-Rosa Burguers is a educational project made with Angular to simulate a fast-food system.
+Rosa Burguers is an educational project made with Angular to simulate a fast-food system. <br/>
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
 
 ## Development server
